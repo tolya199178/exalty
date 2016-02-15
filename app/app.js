@@ -13,6 +13,12 @@ App = Ember.Application.extend({
   Resolver
 });
 
+App.ApplicationView = Ember.View.extend({
+  afterRender: function () {
+    console.log(123123123);
+  }
+});
+
 loadInitializers(App, config.modulePrefix);
 
 export default App;
