@@ -1,0 +1,19 @@
+{{#bs-form model=this action="signup"}}
+	{{bs-form-element controlType="text" hasLabel=false label="Full Name" placeholder="Full Name" property="fullname"}}
+	{{bs-form-element controlType="email" hasLabel=false label="Email" placeholder="Email" property="email"}}
+	{{bs-form-element controlType="password" hasLabel=false label="Password" placeholder="Password" property="password"}}  	
+	<div class="row">	
+		<label class="col-md-12 text-left">
+			Fear of commitment? No Problem!
+			<br/>
+			Try us out for two weeks, completely fee.
+		</label>
+	</div>
+	<br/>
+	<button class="btn btn-primary pull-right" disabled={{loadding}} type="submit">
+		{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+		Sign up
+	</button>
+	<br/>
+	<br/>
+{{/bs-form}}

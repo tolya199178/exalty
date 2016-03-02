@@ -1,0 +1,15 @@
+{{#bs-form  model=this action="login"}}	
+	{{bs-form-element controlType="email"  hasLabel=false label="Email" placeholder="Email Address" property="email"}}
+	{{bs-form-element controlType="password" hasLabel=false label="Password" placeholder="Password" property="password"}}  	
+	<div class="row">	
+		<a href="#" {{action "forgetPassword"}}>Forget your passowrd</a>
+	</div>
+	<br/>
+	
+	<button class="btn btn-primary pull-right" disabled={{loadding}} type="submit">
+		{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+		Log In
+	</button>
+	<br/>
+	<br/>
+{{/bs-form}}

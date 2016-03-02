@@ -1,0 +1,20 @@
+{{#bs-form  model=this action="submit"}}
+<div class="row musician-item-row">
+	  	<div class="col-sm-4">
+	  		{{#bs-form-element hasLabel=false label="" property="musicianId" classNames ="musician-user"}}
+				{{bs-form-element controlType="select" hasLabel=false label="" 
+		  			choices=musicianUsers 
+		  			choiceValueProperty="id" 
+		  			choiceLabelProperty="name"
+		  			placeholder="Musician User" property="activedmusicianRow"}}
+			{{/bs-form-element}}
+	  	</div>
+
+	  	<div class="col-md-offset-1 col-sm-4">	  		
+	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Specify instrument(s)" property="musicianDesc"}}
+	  	</div>
+	  	<div class="col-md-offset-1 col-sm-2 action">
+	  		<a class="remove" href="#" {{action "removeItem" musician}}><i class="fa fa-times"></i></a>
+	  	</div>
+</div>
+{{/bs-form}}

@@ -1,0 +1,40 @@
+{{#bs-form  model=this action="next"}}	
+	<div class="event-form">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="title" property="title"}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				{{#bs-form-element hasLabel=false label="" property="dateAlias" as |dateAlias|}}
+					{{bootstrap-datepicker autoclose=true placeholder="mm/dd/yyyy" class="form-control" value=dateAlias}}
+				{{/bs-form-element}}	
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-5">
+				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Start Time" property="startTime" classNames ="starttime"}}
+			</div>
+			<div class="col-md-2">
+				~
+			</div>
+			<div class="col-md-5">
+				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="End Time" property="endTime" classNames ="endtime"}}
+			</div>			 
+		</div>
+	</div>
+	<br/>
+	<div class="pull-right">
+		<button class="btn btn-default" {{action "closeModal"}}>
+			Cancel
+		</button>&nbsp;&nbsp;
+		<button class="btn btn-primary" disabled={{loadding}} type="submit">
+			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+			Next
+		</button>
+	</div>	
+	<br/>
+	<br/>
+{{/bs-form}}

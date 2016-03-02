@@ -1,0 +1,32 @@
+{{#bs-form  model=this action="" classNames ="musician-form"}}	
+	<div class="musician-rows">	
+	{{#each musician in musicians }}
+		{{musician-row 
+			musician=musician 
+			name=musician.name
+			phoneNumber=musician.phoneNumber
+			phoneType=musician.phoneType
+			email=musician.email
+			removeMusician=(action "removeMusician")}}
+	{{/each}}
+	</div>
+
+	<div class="">
+		<button class="btn btn-default" {{action "addMusician"}}>
+			<i class="fa fa-plus"></i> &nbsp; Add musician
+		</button>
+	</div>
+
+	<br/>
+	<div class="pull-right">
+		<button class="btn btn-default" {{action "closeModal"}}>
+			Cancel
+		</button>&nbsp;&nbsp;
+		<button class="btn btn-primary" disabled={{loadding}} {{action "saveAll"}}>
+			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+			Finish
+		</button>
+	</div>
+	<br/>
+	<br/>
+{{/bs-form}}

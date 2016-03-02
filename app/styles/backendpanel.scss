@@ -1,0 +1,175 @@
+body.adminpanel{
+	background-color:white;
+	/**
+	 * Header
+ 	 */
+ 	#header{
+ 		border-bottom: solid 2px #333;
+ 		color:rgb(81, 88, 94);
+ 		background: white;
+ 		h1{
+ 			opacity: 1; 
+ 			a{
+ 				font-size: 25px;
+    			color: #333;
+ 			}
+ 		}
+ 	}
+ 	/**
+ 	 * Main Body
+ 	 */
+ 	.main-container{
+ 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+ 	    position: absolute;
+	    width: 100%;
+	    top: 50px;
+	    bottom: 0px;
+	    margin-left: 0px;
+	    margin-right: 0px;
+	    .calendar-container{
+	    	position: absolute;
+		    left: 0px;
+		    right: 350px;
+		    height: 100%;
+		    border-right: solid 1px #333;
+		    padding-top: 55px;
+		    padding-left: 20px;
+		    padding-right: 20px;
+		    .calendar-body{
+		    	max-width:900px;
+		    	margin-left:auto;
+		    	margin-right:auto;
+		    	padding: 10px 10px;
+    			border: solid 1px #eee;
+		    }
+	    }
+	    .menu-container{
+	    	position: absolute;
+		    width: 350px;
+		    right: 0px;
+		    height: 100%;
+		    #dashboard-menu{
+		    	ul{
+		    		list-style: none;
+    				padding: 0;
+    				li{    					     				   					
+					    margin: 0.5em 0 0 0;
+					    padding: 13px 0 0 0;
+					    /*border-top: solid 1px rgba(0, 0, 0, 0.125);*/
+					    &:first-child {
+						    border-top: 0 !important;
+						    margin-top: 40px !important;
+						    padding-top: 0 !important;
+						}
+					    a{
+					    	border: 0;
+						    color: rgba(0,0,0,0.8);
+						    font-weight: bold;
+						    display: block;
+						    font-size: 1em;
+						    letter-spacing: 0.125em;
+						    outline: 0;
+						    text-decoration: underline;
+					    }
+    				}
+		    	}
+		    }
+	    }
+ 	}
+
+
+
+ 	/**
+ 	 * Musicians Form
+ 	 */
+ 	.musician-form {
+ 		.musician-rows{
+ 			.row{
+ 				margin-bottom:10px;
+ 				a{
+ 					color:red;
+ 					line-height: 34px;
+    				font-size: 20px;
+ 				}
+ 			}
+ 		}
+ 	}
+
+ 	/**
+ 	 * Event Form
+ 	 */
+ 	.event-form {
+ 		max-width:300px;
+ 		margin-left:auto;
+		margin-right:auto;
+		.form-group{
+			padding-left:0px;
+		}
+ 	}
+
+
+ 	/** 
+ 	 * Event Deatail Row
+ 	 */
+ 	 .serviceitem-rows{ 	 	
+ 	 	.service-item-row{
+	 	 	border: solid 1px #8E8B8B;
+		    border-radius: 7px;
+		    padding-left: 0px;
+		    margin-left: 0px;
+		    padding-top: 8px;
+		    padding-bottom: 6px;
+		    margin-bottom:10px;
+	 	 	.form-group {
+	 	 		margin-bottom:0px;
+	 	 	}
+	 	 	.action{
+	 	 		text-align:right;
+	 	 		padding-right:20px;
+	 	 		a.remove{
+					color:red;
+					line-height: 34px;
+					font-size: 20px;
+				}
+				a.edit{
+					line-height: 34px;
+					font-size: 20px;
+				}
+	 	 	}
+	 	 	a{			
+				line-height: 34px;
+				text-decoration: underline
+			}
+	 	 }
+ 	 }
+
+ 	 /** 
+ 	 * Event Deatail Row
+ 	 */
+ 	 .muscianitem-rows{ 	 	
+ 	 	.musician-item-row{
+		    padding-left: 0px;
+		    /*margin-left: 0px;*/
+		    padding-top: 8px;
+		    padding-bottom: 6px;
+		    margin-bottom:10px;
+	 	 	.form-group {
+	 	 		margin-bottom:0px;
+	 	 	}
+	 	 	.action{
+	 	 		text-align:right;
+	 	 		padding-right:20px;
+	 	 		a.remove{
+					color:red;
+					line-height: 34px;
+					font-size: 20px;
+				}				
+	 	 	}
+	 	 	.musician-user{
+			    margin-right: -30px;
+			    padding-right: 30px;
+	 	 	}
+	 	 }
+ 	 }
+ 	 
+}

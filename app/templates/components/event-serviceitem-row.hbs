@@ -1,0 +1,10 @@
+{{#bs-form  model=this action="submit"}}
+<div class="row service-item-row">
+	  	<div class="col-sm-4">	  		
+	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Service Item" property="title"}}
+	  	</div>
+	  	<div class="col-md-offset-6 col-sm-2 action">
+	  		<a class="remove" href="#" {{action "removeServiceItem" serviceItem}}><i class="fa fa-times"></i></a>
+	  	</div>
+</div>
+{{/bs-form}}

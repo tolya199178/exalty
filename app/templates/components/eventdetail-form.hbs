@@ -1,0 +1,66 @@
+{{#bs-form  model=this action="" classNames ="musician-form"}}	
+	<!-- Service Item Rows -->
+	<div class="serviceitem-rows">
+		{{#each serviceItem in serviceItems}}
+			{{#if-equal param1=serviceItem.itemType param2="service"}}
+				{{event-serviceitem-row
+					serviceItem=serviceItem
+					title=serviceItem.title
+					removeServiceItem=(action "removeServiceItem")}}
+			{{/if-equal}}
+			{{#if-equal param1=serviceItem.itemType param2="song"}}
+				{{event-servicesong-row
+					serviceItem=serviceItem
+					title=serviceItem.title
+					editSong=(action "editSong")
+					removeServiceItem=(action "removeServiceItem")}}
+			{{/if-equal}}
+		{{/each}}
+	</div>	
+	<div class="">
+		<button class="btn btn-default" {{action "addService"}}>
+			<i class="fa fa-plus"></i> &nbsp; Add new service
+		</button>
+		&nbsp;&nbsp;
+		<button class="btn btn-default" {{action "addSong"}}>
+			<i class="fa fa-plus"></i> &nbsp; Add new song
+		</button>
+	</div>
+	<hr/>
+
+	<div class="muscianitem-rows">
+		{{#each musicianitem in musicianItems }}
+			{{event-musician-row
+				musician=musicianitem 
+				musicianId=musicianitem.musicianId
+				musicianDesc=musicianitem.musicianDesc
+				removeMusician=(action "removeMusician")}}
+		{{/each}}
+	</div>
+
+	<div class="">
+		<button class="btn btn-default" {{action "addMusician"}}>
+			<i class="fa fa-plus"></i> &nbsp; Add musician
+		</button>		
+	</div>
+
+
+	<br/>
+	<div class="pull-right">
+		<button class="btn btn-default" {{action "closeModal"}}>
+			Cancel
+		</button>&nbsp;&nbsp;
+		<button class="btn btn-primary" disabled={{loadding}} {{action "save"}}>
+			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+			Finish
+		</button>
+	</div>
+	<br/>
+	<br/>
+{{/bs-form}}
+
+{{#bs-modal title="Song Detail" open=openSongEditModal footer=false}}	
+	{{#if openSongEditModal}}
+		{{songdetail-form song=activedSong mode=songEditMode  addsong=(action "addSongItem")  modalclose=(action "closeSongModal") }}
+	{{/if}}
+{{/bs-modal}}

@@ -6,6 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    firebase: 'https://exaltly.firebaseio.com/',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -20,7 +21,10 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'font-src': "'self' data: fonts.gstatic.com",
-      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com"
+      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com",
+      'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com",
+      'frame-src': "'self' https://*.firebaseio.com",
+      'script-src': "'self' 'unsafe-eval' https://*.firebaseio.com"
     }
   };
 

@@ -1,15 +1,25 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	actions: {	    
+	applicationController: Ember.inject.controller('application'),
+	actions: {
 	    signup(){
-			console.log("sign up");
+	    	this.get("applicationController").send("showModal", "Signup", "signup-form");
+		},
+		createEvent(){
+
+		},
+		manageMusicians(){
+
+		},
+		myAccount(){
+
 		},
 		login(){
-			console.log("log in");
+			this.get("applicationController").send("showModal", "Login", "login-form");
 		},
 		contact(){
-			console.log("contact us");
+			this.get("applicationController").send("showModal", "Contact Us", "contact-us");
 		}
 	  }
 });

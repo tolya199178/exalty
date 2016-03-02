@@ -1,0 +1,17 @@
+{{#bs-form  model=this action="save"}}	
+	{{bs-form-element controlType="text"  hasLabel=false label="" placeholder="Song #" property="title"}}
+	{{bs-form-element controlType="text"  hasLabel=false label="" placeholder="Song YouTube Link" property="youtubeUrl"}}
+	{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Song Chords Link" property="chordsUrl"}}  		
+	
+	<div class="pull-right">
+		<button class="btn btn-default" {{action "closeModal"}}>
+			Cancel
+		</button>&nbsp;&nbsp;
+		<button class="btn btn-primary" disabled={{loadding}} type="submit">
+			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+			Finish
+		</button>
+	</div>
+	<br/>
+	<br/>
+{{/bs-form}}

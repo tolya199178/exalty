@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
+
+
 import config from './config/environment';
 
 let App;
@@ -13,12 +15,8 @@ App = Ember.Application.extend({
   Resolver
 });
 
-App.ApplicationView = Ember.View.extend({
-  afterRender: function () {
-    console.log(123123123);
-  }
-});
 
 loadInitializers(App, config.modulePrefix);
+
 
 export default App;

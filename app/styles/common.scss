@@ -1,0 +1,30 @@
+.c-notification__container{
+	z-index: 10005 !important;
+}
+#header { 
+    z-index: 1000 !important;
+}
+
+
+/**
+ * Landging page
+ */
+ body.landing{
+	.modal-dialog{
+		max-width:500px;
+	} 
+ }
+
+ body.adminpanel{
+	 @media (min-width: 768px){
+		.modal-dialog {
+		    width: 800px;
+		}	 
+	}
+ }
+
+.contact-us-form{
+	.input-row{
+		max-width:300px;
+	}
+}

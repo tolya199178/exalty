@@ -1,0 +1,15 @@
+{{#bs-form  model=this action="submit"}}
+<div class="row service-item-row">
+	  	<div class="col-sm-4">
+	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Song" property="title"}}
+	  	</div>
+	  	<div class="col-md-offset-2 col-sm-4">
+	  		<a href="{{serviceItem.youtubeUrl}}" target="_blank">YouTube link</a>&nbsp;&nbsp;
+	  		<a href="{{serviceItem.chordsUrl}}" target="_blank">Chords Link</a>
+	  	</div>
+	  	<div class="col-sm-2 action">
+	  		<a class="edit" href="#" {{action "editSong" serviceItem}}><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;&nbsp;
+	  		<a class="remove" href="#" {{action "removeServiceItem" serviceItem}}><i class="fa fa-times"></i></a>
+	  	</div>
+</div>
+{{/bs-form}}

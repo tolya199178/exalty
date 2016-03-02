@@ -4,8 +4,12 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+      'ember-bootstrap':{},
+      'ember-validations':{}
     // Add options here
   });
+
+  app.import('bower_components/jquery.maskedinput/dist/jquery.maskedinput.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
