@@ -12,6 +12,7 @@ export default Ember.Component.extend({
 	openSongEditModal:false,
 	activedSong:null,
 	songEditMode:null,
+	sondmodalTitle:null,
 
 	musicianItems:[],
 	deletedMusicianItems:[],
@@ -54,21 +55,23 @@ export default Ember.Component.extend({
 					createdAt:(new Date()).valueOf()
 				})
 			this.set("activedSong", row);
+			this.set("sondmodalTitle", "Add Song");
 			this.set("songEditMode", "create");
 			this.set("openSongEditModal", true);
 		},
 		addSongItem(songRow){
 			let data = this.get("serviceItems")
 			data.pushObject(songRow);
-			this.set("songEditMode", "");
+			this.set("songEditMode", "");			
 			this.set("openSongEditModal", false);
 		},
 		closeSongModal(){
 			this.set("openSongEditModal", false);
 		},
 		editSong(songRow){
-			let row = songRow;
+			let row = songRow;			
 			this.set("activedSong", row);
+			this.set("sondmodalTitle", "Edit Song");
 			this.set("songEditMode", "edit");
 			this.set("openSongEditModal", true);
 		},
@@ -89,6 +92,10 @@ export default Ember.Component.extend({
 			let data = this.get("musicianItems");
 			this.get("deletedMusicianItems").pushObject(row);
 			data.removeObject(row);
+		},
+
+		backdrop(){
+			console.log(123);
 		},
 
 		save(){

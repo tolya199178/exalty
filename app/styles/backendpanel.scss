@@ -261,4 +261,13 @@ body.adminpanel{
             padding-right: 13px;
         }
     }
+
+    /**
+     * Date picker
+     */
+    .datepicker-days{
+         &, input, select, textarea {
+            line-height: 1em;
+        }   
+    }
 }

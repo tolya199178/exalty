@@ -59,7 +59,7 @@
 	<br/>
 {{/bs-form}}
 
-{{#bs-modal title="Song Detail" open=openSongEditModal footer=false}}	
+{{#bs-modal title=sondmodalTitle open=openSongEditModal footer=false backdropClose=false}}	
 	{{#if openSongEditModal}}
 		{{songdetail-form song=activedSong mode=songEditMode  addsong=(action "addSongItem")  modalclose=(action "closeSongModal") }}
 	{{/if}}

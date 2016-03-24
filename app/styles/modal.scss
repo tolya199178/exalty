@@ -38,6 +38,10 @@
 		    box-shadow: none !important;
 		    color: #ffffff !important;
 		}
+		&.default {
+		    box-shadow: inset 0 0 0 2px #dfdfdf !important;
+    		color: #2E3842 !important;
+		}
 		&.disabled, &:disabled {
 		    -moz-pointer-events: none;
 		    -webkit-pointer-events: none;
