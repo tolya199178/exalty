@@ -5,5 +5,6 @@ export default DS.Model.extend({
   musicianId: DS.attr('string'),
   musicianDesc: DS.attr('string'),
   userId: DS.attr('string'),
+  eventId: DS.attr('string'),
   createdAt: DS.attr('number')
 });

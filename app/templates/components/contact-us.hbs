@@ -1,13 +1,15 @@
 {{#bs-form model=this action="sentMessage" classNames ="contact-us-form"}}
-	{{bs-form-element controlType="text"  hasLabel=false label="Full Name" placeholder="Full Name" property="fullname" classNames ="input-row"}}
+	{{bs-form-element controlType="text"  hasLabel=false  placeholder="First Name" property="firstname" classNames ="input-row"}}
+	{{bs-form-element controlType="text"  hasLabel=false  placeholder="Last Name" property="lastname" classNames ="input-row"}}
 	{{bs-form-element controlType="email"  hasLabel=false label="Email" placeholder="Email" property="email" classNames ="input-row"}}
 	{{bs-form-element controlType="text"  hasLabel=false label="Email Title" placeholder="Email Title" property="title" classNames ="input-row"}}
-	{{bs-form-element controlType="textarea"  hasLabel=false label="Content" placeholder="write your message on here" property="content"}}	
+	{{bs-form-element controlType="textarea"  hasLabel=false label="Content" placeholder="Write your message here." property="content"}}	
 	
-	<button class="btn btn-primary pull-right" disabled={{loadding}} type="submit">
-		{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
-		Send
-	</button>
-	<br/>
-	<br/>
+	<div class="row">
+		<button class="button special pull-right" disabled={{loadding}} type="submit">
+			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+			SEND
+		</button>
+	</div>
+	
 {{/bs-form}}

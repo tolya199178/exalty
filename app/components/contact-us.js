@@ -4,18 +4,23 @@ import EmberValidations from 'ember-validations';
 export default Ember.Component.extend(EmberValidations, {
 	store: Ember.inject.service(),
 	email: null,  	
-  	fullname: null,
+  	firstname: null,
+  	lastname: null,
   	title: null,
   	content: null,
   	loadding:false,
   	validations: {
-  		fullname: {
+  		firstname: {
+	      presence: true,	      
+	    },
+	    lastname: {
 	      presence: true,	      
 	    },
 	    email: {
 	      presence: true,
 	      format: {
-	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+	        message: 'Invalid email address.'
 	      }
 	    },
 	    title: {
@@ -34,7 +39,8 @@ export default Ember.Component.extend(EmberValidations, {
   			this.set("loadding", true);
   			let that = this;
   			let row = that.get('store').createRecord('contact-us', {
-			  fullName: that.get("fullname"),
+			  firstName: that.get("firstname"),
+			  lastName: that.get("lastname"),
 			  email: that.get("email"),
 			  title: that.get("title"),
 			  content: that.get("content"),			  

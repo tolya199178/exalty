@@ -14,7 +14,7 @@ export default Ember.Component.extend(EmberValidations, {
   	   };
 	}),
   	startTime: null,
-  	endtime: null,
+  	endTime: null,
   	validations: {
   		title: {
 	      presence: true,
@@ -27,14 +27,15 @@ export default Ember.Component.extend(EmberValidations, {
 		this._super();
 		$(this.$()).parents(".modal-dialog").attr("style", "max-width:600px");
 		$(".starttime input", this.$()).mask("99:99");
-		$(".endtime input", this.$()).mask("99:99");
+		$(".endTime input", this.$()).mask("99:99");
 		let event = this.get("eventwizard").getEvent();
 		this.set("event", event);
 		this.set("title", event.get("title"));
 		this.set("date", event.get("date"));		
 		this.set("startTime", event.get("startTime"));
-		this.set("endtime", event.get("endtime"));
+		this.set("endTime", event.get("endTime"));
 		let dateValue = event.get("date");
+		console.log("123");
 		if(dateValue){
 			this.set("dateAlias", moment(dateValue).toDate());
 		}
@@ -45,13 +46,14 @@ export default Ember.Component.extend(EmberValidations, {
 			event.set("title", this.get("title"));
 			event.set("date", this.get("date"));		
 			event.set("startTime", this.get("startTime"));
-			event.set("endtime", this.get("endtime"));
+			event.set("endTime", this.get("endTime"));
 			this.get("eventwizard").setEvent(event);
 			let modal = this.get("modal");
 			Ember.set(modal, "modalTitle", "Event Details");
 			Ember.set(modal, "modalTemplete", "eventdetail-form");
 		},
 		closeModal(){
+			console.log(this.get("router.router"));
 			this.get("modalclose")();
 		}
 	}

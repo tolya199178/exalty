@@ -4,6 +4,7 @@ export default Ember.Component.extend({
 	store:Ember.inject.service(),
 	eventwizard:Ember.inject.service(),
 	authorize:Ember.inject.service(),
+	eventService: Ember.inject.service(),
 	event:null,
 
 	serviceItems:Ember.A([]),
@@ -91,6 +92,7 @@ export default Ember.Component.extend({
 		},
 
 		save(){
+
 			$("form",this.$()).trigger("submit");
 			let that = this;
 			this.set("loadding", true);
@@ -134,12 +136,13 @@ export default Ember.Component.extend({
 				Ember.run.later((function(){
 						that.set("loadding", false);
 						that.get("modalclose")();
+						that.get("eventService").updateEvent();
 					}),1000)
 				
 			  }
 			}), 1000);	
 		},
-		
+
 		closeModal(){
 			this.get("modalclose")();
 		}

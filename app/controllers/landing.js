@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
 	applicationController: Ember.inject.controller('application'),
 	actions: {
 	    signup(){
-	    	this.get("applicationController").send("showModal", "Signup", "signup-form");
+	    	this.get("applicationController").send("showModal", "Sign up", "signup-form");
 		},
 		createEvent(){
 
@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
 
 		},
 		login(){
-			this.get("applicationController").send("showModal", "Login", "login-form");
+			this.get("applicationController").send("showModal", "Log in", "login-form");
 		},
 		contact(){
 			this.get("applicationController").send("showModal", "Contact Us", "contact-us");

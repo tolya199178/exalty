@@ -6,10 +6,35 @@ export default Ember.Controller.extend({
 	applicationController: Ember.inject.controller('application'),
 	eventwizard:Ember.inject.service(),
 	routing: Ember.inject.service(),
+	eventService: Ember.inject.service(),
+	eventData:[],
+	loading:false,
+	init(){
+		let that = this;
+		this.get("eventService").initObj();
+		this.get("eventService").addObserver("eventCalendarData", function(evnets){
+			that.set("eventData", that.get("eventService").get("eventCalendarData"));
+		});
+	},
 	actions: {
 		clicked(event, jsEvent, view){
-			console.log(`${event.title} was clicked!`)
-			// Prints: Hackathon was clicked! 
+			let that = this;
+			let eId = event.eId;
+			this.set("loading", true);
+			this.get("eventwizard").initObj(eId).then(function(){
+				that.set("loading", false);
+				that.get("applicationController").send("showModal", "Edit Event", "event-form");
+			});
+		},
+		dayClicked(date, jsEvent, view){
+			let clickedDate = date._d;
+			console.log(clickedDate);
+			this.get("eventwizard").initObj();
+			let event = this.get("eventwizard").get("event");
+			event.set("date", moment(clickedDate).format("YYYY-MM-DD"));
+			this.get("eventwizard").setEvent(event);
+			this.get("applicationController").send("showModal", "Create Event", "event-form");
+			
 		},
 		createEvent(){
 			this.get("eventwizard").initObj();
@@ -19,7 +44,7 @@ export default Ember.Controller.extend({
 			this.get("applicationController").send("showModal", "Manage musicians", "musician-form");
 		},
 		myAccount(){
-
+			this.get("applicationController").send("showModal", "My Account", "myaccount-form");
 		},
 		contactus(){
 			this.get("applicationController").send("showModal", "Contact Us", "contact-us");

@@ -1,19 +1,18 @@
 {{#bs-form model=this action="signup"}}
-	{{bs-form-element controlType="text" hasLabel=false label="Full Name" placeholder="Full Name" property="fullname"}}
+	{{bs-form-element controlType="text" hasLabel=false label="First Name" placeholder="First Name" property="firstname"}}
+	{{bs-form-element controlType="text" hasLabel=false label="Last Name" placeholder="Last Name" property="lastname"}}
 	{{bs-form-element controlType="email" hasLabel=false label="Email" placeholder="Email" property="email"}}
 	{{bs-form-element controlType="password" hasLabel=false label="Password" placeholder="Password" property="password"}}  	
-	<div class="row">	
-		<label class="col-md-12 text-left">
-			Fear of commitment? No Problem!
-			<br/>
-			Try us out for two weeks, completely fee.
-		</label>
+	<div class="row">
+		<p class="col-md-12 text-left">
+			Seeing if this is right for you? No problem!<br/>
+			Try us out free for one month--you won't be asked for payment information until then.
+		</p>				
 	</div>
-	<br/>
-	<button class="btn btn-primary pull-right" disabled={{loadding}} type="submit">
-		{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
-		Sign up
-	</button>
-	<br/>
-	<br/>
+	<div class="row">
+		<button class="button special pull-right" disabled={{loadding}} type="submit">
+			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+			SIGN UP
+		</button>
+	</div>	
 {{/bs-form}}

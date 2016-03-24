@@ -7,17 +7,60 @@ export default Ember.Service.extend({
 	musicianUsers:[],
 	store: Ember.inject.service(),
 	authorize: Ember.inject.service(),
-	initObj(){
+	initObj(eId){
+		let that = this;
 		this.set("event", null);
 		this.set("serviceItems", Ember.A([]));
 		this.set("musicians", Ember.A([]));
-		let event = this.get("store").createRecord("event",{
+		this.setMusicianUsers();
+		if(!eId){
+			/* create mode*/
+			let event = this.get("store").createRecord("event",{
 				userId:this.get("authorize").getUserId(),
 				createdAt:(new Date()).valueOf()
 			})
-		this.set("event", event);
-		this.setMusicianUsers();
+			this.set("event", event);
+		}else{
+			return new Ember.RSVP.Promise(function(resolve) {
+
+				//getEvent
+				that.get("store").find("event",{
+					equalTo:eId 
+				}).then(function(res){
+					var data = res.toArray();
+					if(data.length > 0){
+						that.set("event", data[0]);
+					}else{
+						let event = that.get("store").createRecord("event",{
+							userId:that.get("authorize").getUserId(),
+							createdAt:(new Date()).valueOf()
+						})
+						that.set("event", event);
+					}
+						//getServiceItem
+						that.get("store").find("event-service",{
+							orderBy: 'eventId',
+							equalTo:eId 
+						}).then(function(res){
+							let  serviceItems = res.toArray();
+							that.set("serviceItems", serviceItems);
+
+							//getMusician
+							that.get("store").find("event-musician",{
+								orderBy: 'eventId',
+								equalTo:eId 
+							}).then(function(res){
+								let  musicians = res.toArray();
+								that.set("musicians", musicians);
+								//getServiceItem								
+								resolve(true);
+							})	
+						})					
+				})
+			})
+		}
 	},
+
 	getEvent(){
 		return this.get("event");
 	},

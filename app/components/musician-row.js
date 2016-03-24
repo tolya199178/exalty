@@ -27,7 +27,8 @@ export default Ember.Component.extend(EmberValidations, {
 	    email: {
 	      presence: true,
 	      format: {
-	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+	        message: 'Invalid email address.'
 	      }
 	    },
 	    phoneNumber: {

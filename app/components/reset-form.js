@@ -10,10 +10,15 @@ export default Ember.Component.extend(EmberValidations, {
 	    email: {
 	      presence: true,
 	      format: {
-	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+	        message: 'Invalid email address.'
 	      }
 	    }
   	},
+  	didInsertElement() {		
+	  this._super();
+	  $(this.$()).parents(".modal-dialog").attr("style", "max-width:500px")	
+	},
   	actions:{
 		resetPasswd(){
 			this.set("loadding", true);

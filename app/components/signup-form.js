@@ -6,23 +6,32 @@ export default Ember.Component.extend(EmberValidations, {
 	store: Ember.inject.service(),	
 	email: null,
   	password: null,
-  	fullname: null,
+  	firstname: null,
+  	lastname: null,
   	loadding:false,
   	validations: {
-  		fullname: {
-	      presence: true,	      
+  		firstname: {
+	      presence: true,
+	    },
+	    lastname: {
+	      presence: true,
 	    },
 	    email: {
 	      presence: true,
 	      format: {
-	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+	        message: 'Invalid email address.'
 	      }
 	    },
 	    password: {
 	      presence: true,
-	      length: { minimum: 6, maximum: 12}
+	      length: { minimum: 6, maximum: 32}
 	    }
-  	},  	
+  	}, 
+  	didInsertElement() {		
+	  this._super();
+	  $(this.$()).parents(".modal-dialog").attr("style", "max-width:500px")	
+	}, 	
   	actions:{
   		signup(){
   			this.set("loadding", true);
@@ -51,15 +60,26 @@ export default Ember.Component.extend(EmberValidations, {
 			  } else {
 			    console.log("Successfully created user account with uid:", userData.uid);
 			    var user = that.get('store').createRecord('user', {
-				  fullName: that.get("fullname"),
+				  firstName: that.get("firstname"),
+				  lastName: that.get("lastname"),
 				  email: that.get("email"),
 				  userId:userData.uid,
 				  createdAt:(new Date()).valueOf()
 				});
 				user.save().then(function(){
 					that.set("loadding", false);
-					that.get("showNotification")("Successfully created user account", "success");
-					that.get("modalclose")();
+					/**
+					 *Create customer
+					 */
+	                var customerRef = new Firebase(config.firebase + "/customers");
+	                customerRef.child(userData.uid).set({
+									email: that.get("email"),
+									description: 'Customer for ' + that.get("email")
+								});	                
+					Ember.run.later((function() {					
+						that.get("modalclose")();					
+					}), 1000)
+	                that.get("showNotification")("Successfully created user account", "success");
 				});
 			  }
 			});

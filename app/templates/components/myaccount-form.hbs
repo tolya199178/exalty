@@ -1,0 +1,36 @@
+{{#bs-form formLayout="horizontal" model=this action="saveUser"}}
+	{{bs-form-element controlType="text" hasLabel=true label="Account Onwer" placeholder="Full Name" property="fullName"}}
+	{{bs-form-element controlType="email" hasLabel=true label="Email" placeholder="Email" property="email" classNames="email"}}
+	{{bs-form-element controlType="password" hasLabel=true label="Current Password" placeholder="Old Password" property="oldpassword"}}  	
+	{{bs-form-element controlType="password" hasLabel=true label="New Password" placeholder="New Password" property="password"}}  	
+	<br/>
+
+	
+	{{#if-equal param1=editCreditcard param2=false}}
+	<div class="text-center">	
+		<button class="btn btn-default" {{action "editCreditCard"}}>
+			Change Credit Card
+		</button>	
+	</div>
+	{{/if-equal}}
+
+	{{#if-equal param1=editCreditcard param2=true}}
+		{{crediticard-form cardNumber=cardNumber expireDate=expireDate cvc=cvc }}
+	{{/if-equal}}
+
+
+	<br/>
+	
+	<div class="text-center">	
+		<button class="btn btn-default" {{action "deleteAccount"}}>
+			Delete Account
+		</button>	
+	</div>
+	<br/>
+	<button class="btn btn-primary pull-right" disabled={{loadding}} type="submit">
+		{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+		Done
+	</button>
+	<br/>
+	<br/>
+{{/bs-form}}

@@ -1,7 +1,7 @@
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic');
 
 /*
 	Spectral by HTML5 UP
@@ -41,7 +41,7 @@
 			}
 		}
 	}
-	
+
 
 	#page-wrapper, #menu{
 		color: _palette(fg);
@@ -908,7 +908,8 @@
 		width: 100%;
 
 		li {
-			@include padding(4em, 4em, (0,0,0,2em));
+			/*@include padding(4em, 4em, (0,0,0,2em));*/
+			padding: 4em 4em 2em 6em !important;
 			display: block;
 			position: relative;
 			text-align: left;
@@ -1081,11 +1082,11 @@
 
 				&.major {
 					h2, h3, h4, h5, h6 {
-						border-color: _palette($p, border);
+						border-color: _palette($p, border) !important;
 					}
 
 					p {
-						color: _palette($p, fg);
+						color: _palette($p, fg) !important;
 					}
 				}
 			}
@@ -1152,7 +1153,7 @@
 
 			.icon {
 				&.major {
-					border-color: _palette($p, border);
+					border-color: _palette($p, border) !important;
 				}
 			}
 
