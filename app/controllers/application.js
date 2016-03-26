@@ -2,13 +2,19 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({  
   viewModal: false,
+  handback:true,
   modal:{},
   actions: {
-    showModal: function(modalTitle, modalName) {
+    showModal: function(modalTitle, modalName, handback) {      
+      if(typeof handback == "undefined"){
+        handback = true;
+      }
+      this.set('handback', handback);
       let that = this;
       let modal ={}
       that.set("modal", modal);
       this.set("viewModal", false);
+
       Ember.run.later((function(){
             modal = {
               modalTitle: modalTitle,

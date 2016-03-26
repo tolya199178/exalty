@@ -22,7 +22,7 @@ export default Ember.Component.extend(EmberValidations, {
   	},
   	didInsertElement() {		
 	  this._super();
-	  $(this.$()).parents(".modal-dialog").attr("style", "max-width:800px");
+	  $(this.$()).parents(".modal-dialog").attr("style", "max-width:500px");
 	},
   	actions:{
   		login(){

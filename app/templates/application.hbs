@@ -2,7 +2,7 @@
 
 {{notification-container notifications=notifications}}
 
-{{#bs-modal title=modal.modalTitle open=viewModal footer=false}}
+{{#bs-modal title=modal.modalTitle open=viewModal footer=false backdropClose=handback}}
 	{{#if modal.modalTemplete}}
 	  {{component  modal.modalTemplete modal=modal modalclose=(action "removeModal") showNotification=(action "showNotification")}}
 	{{/if}}

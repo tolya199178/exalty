@@ -169,13 +169,13 @@ body.adminpanel{
      */
     .serviceitem-rows{
         .service-item-row{
-            border: solid 1px #8E8B8B;
-            border-radius: 7px;
+            /*border: solid 1px #8E8B8B;
+            border-radius: 7px;*/
             padding-left: 0px;
-            margin-left: 0px;
             padding-top: 8px;
             padding-bottom: 6px;
-            margin-bottom:10px;
+            margin-bottom:5px;
+            margin-left:0px;
             .form-group {
                 margin-bottom:0px;
             }
@@ -192,9 +192,13 @@ body.adminpanel{
                     font-size: 20px;
                 }
             }
-            a{
+            a.link{
                 line-height: 34px;
-                text-decoration: underline
+                color: #4A4A4A;
+                text-decoration: none;
+                border-bottom: 1px;
+                border-bottom-style: dotted;
+                padding: 0px 0px 0px 0px;
             }
         }
     }
@@ -204,11 +208,11 @@ body.adminpanel{
     */
     .muscianitem-rows{
         .musician-item-row{
-            padding-left: 0px;
-            /*margin-left: 0px;*/
+            padding-left: 0px;            
             padding-top: 8px;
             padding-bottom: 6px;
-            margin-bottom:10px;
+            margin-bottom:5px;
+            margin-left:0px;
             .form-group {
                 margin-bottom:0px;
             }
@@ -227,6 +231,13 @@ body.adminpanel{
             }
         }
     }
+
+    /**
+     *
+     */
+    .button-row{
+        margin-left:24px;
+    } 
 
     .loading-container{
         position: absolute;

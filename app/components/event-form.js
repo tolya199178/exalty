@@ -35,7 +35,6 @@ export default Ember.Component.extend(EmberValidations, {
 		this.set("startTime", event.get("startTime"));
 		this.set("endTime", event.get("endTime"));
 		let dateValue = event.get("date");
-		console.log("123");
 		if(dateValue){
 			this.set("dateAlias", moment(dateValue).toDate());
 		}
@@ -49,7 +48,7 @@ export default Ember.Component.extend(EmberValidations, {
 			event.set("endTime", this.get("endTime"));
 			this.get("eventwizard").setEvent(event);
 			let modal = this.get("modal");
-			Ember.set(modal, "modalTitle", "Event Details");
+			Ember.set(modal, "modalTitle", "Schedule Event");
 			Ember.set(modal, "modalTemplete", "eventdetail-form");
 		},
 		closeModal(){

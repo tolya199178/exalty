@@ -17,13 +17,13 @@
 			{{/if-equal}}
 		{{/each}}
 	</div>	
-	<div class="">
-		<button class="btn btn-default" {{action "addService"}}>
-			<i class="fa fa-plus"></i> &nbsp; Add new service
+	<div class="button-row">
+		<button class="button default" {{action "addService"}}>
+			<i class="fa fa-plus"></i>&nbsp;Add service item
 		</button>
 		&nbsp;&nbsp;
-		<button class="btn btn-default" {{action "addSong"}}>
-			<i class="fa fa-plus"></i> &nbsp; Add new song
+		<button class="button default" {{action "addSong"}}>
+			<i class="fa fa-plus"></i>&nbsp;Add song
 		</button>
 	</div>
 	<hr/>
@@ -38,28 +38,27 @@
 		{{/each}}
 	</div>
 
-	<div class="">
-		<button class="btn btn-default" {{action "addMusician"}}>
-			<i class="fa fa-plus"></i> &nbsp; Add musician
+	<div class="button-row">
+		<button class="button default" {{action "addMusician"}}>
+			<i class="fa fa-plus"></i>&nbsp;Add musician
 		</button>		
 	</div>
 
-
-	<br/>
-	<div class="pull-right">
-		<button class="btn btn-default" {{action "closeModal"}}>
-			Cancel
-		</button>&nbsp;&nbsp;
-		<button class="btn btn-primary" disabled={{loadding}} {{action "save"}}>
-			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
-			Finish
-		</button>
+	<div class="row">
+		<div class="pull-right">
+			<button class="button default" {{action "closeModal"}}>
+				Cancel
+			</button>&nbsp;&nbsp;
+			<button class="button special" disabled={{loadding}} {{action "save"}}>
+				{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+				Finish
+			</button>
+		</div>
 	</div>
-	<br/>
-	<br/>
+
 {{/bs-form}}
 
-{{#bs-modal title=sondmodalTitle open=openSongEditModal footer=false backdropClose=false}}	
+{{#bs-modal title=sondmodalTitle open=openSongEditModal footer=false backdropClose=handback}}	
 	{{#if openSongEditModal}}
 		{{songdetail-form song=activedSong mode=songEditMode  addsong=(action "addSongItem")  modalclose=(action "closeSongModal") }}
 	{{/if}}

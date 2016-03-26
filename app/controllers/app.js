@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
 			this.set("loading", true);
 			this.get("eventwizard").initObj(eId).then(function(){
 				that.set("loading", false);
-				that.get("applicationController").send("showModal", "Edit Event", "event-form");
+				that.get("applicationController").send("showModal", "Schedule Event", "event-form", false);
 			});
 		},
 		dayClicked(date, jsEvent, view){
@@ -33,12 +33,12 @@ export default Ember.Controller.extend({
 			let event = this.get("eventwizard").get("event");
 			event.set("date", moment(clickedDate).format("YYYY-MM-DD"));
 			this.get("eventwizard").setEvent(event);
-			this.get("applicationController").send("showModal", "Create Event", "event-form");
+			this.get("applicationController").send("showModal", "Schedule Event", "event-form", false);
 			
 		},
 		createEvent(){
 			this.get("eventwizard").initObj();
-			this.get("applicationController").send("showModal", "Create Event", "event-form");
+			this.get("applicationController").send("showModal", "Schedule Event", "event-form", false);
 		},
 		manageMusicians(){
 			this.get("applicationController").send("showModal", "Manage musicians", "musician-form");
