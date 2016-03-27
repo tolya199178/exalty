@@ -3,37 +3,61 @@ import EmberValidations from 'ember-validations';
 
 export default Ember.Component.extend(EmberValidations, {	
 	PhoneServices: Ember.A([
-							{key:"",value:""},
+							{key:"",value:"Carrier"},
 							{key:"Verizon",value:"Verizon"},
 							{key:"T-Mobile",value:"T-Mobile"},
 							{key:"Virgin-Mobile",value:"Virgin Mobile"},
 							{key:"AT&T",value:"AT&T"},
-							{key:"Tracfone",value:"Tracfone"},
+							{key:"Tracfone",value:"Tracfone"}
 						]),
 	email: null,  	
-  	name: null,
+  	firstName: null,
+  	lastName: null,
   	phoneNumber: null,
+  	phoneNumberChanged: Ember.observer('phoneNumber', function() {  		
+  	   let number  = this.get("phoneNumber");  	   
+  	   if(number == "(___)___-____"){
+  	   		this.set("phoneNumber", null);
+  	   }
+	}),
   	phoneType: null,
   	phoneTypeRow:{},
-  	phoneTypeRowChanged: Ember.observer('phoneTypeRow', function() {
-  	   let row  = this.get("phoneTypeRow");
+  	phoneTypeRowChanged: Ember.observer('phoneTypeRow', function() {  		
+  	   let row  = this.get("phoneTypeRow");  	   
 	   this.set("phoneType", row["key"]?row["key"]:null); 
+	   if(row.key){
+	   		$("select", this.$()).removeClass("placeholder");
+	   }else{
+			$("select", this.$()).addClass("placeholder");
+	   }
 	}),
 	
   	validations: {
-  		name: {
-	      presence: true,	      
-	    },  		
+  		firstName: {
+	      presence: true,
+	    },
+	    lastName: {
+	      presence: true,
+	    },
 	    email: {
 	      presence: true,
 	      format: {
 	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
 	        message: 'Invalid email address.'
 	      }
+	    },	    
+	    phoneType: {
+	    	presence:{
+			    'if': function(that, validator) {			    	
+			    	let phoneNumber = that.get("phoneNumber");
+			    	if(phoneNumber){
+			    		return true;
+			    	}else{
+			    		return false;
+			    	}
+			    }
+			}
 	    },
-	    phoneNumber: {
-	      presence: true,	      
-	    }
   	},
 
   	didInsertElement() {

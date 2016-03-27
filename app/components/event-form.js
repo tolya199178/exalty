@@ -51,8 +51,7 @@ export default Ember.Component.extend(EmberValidations, {
 			Ember.set(modal, "modalTitle", "Schedule Event");
 			Ember.set(modal, "modalTemplete", "eventdetail-form");
 		},
-		closeModal(){
-			console.log(this.get("router.router"));
+		closeModal(){			
 			this.get("modalclose")();
 		}
 	}

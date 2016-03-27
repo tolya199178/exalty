@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
 			this.get("applicationController").send("showModal", "Schedule Event", "event-form", false);
 		},
 		manageMusicians(){
-			this.get("applicationController").send("showModal", "Manage musicians", "musician-form");
+			this.get("applicationController").send("showModal", "Musicians", "musician-form", false);
 		},
 		myAccount(){
 			this.get("applicationController").send("showModal", "My Account", "myaccount-form");

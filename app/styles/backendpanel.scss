@@ -147,6 +147,29 @@ body.adminpanel{
                     line-height: 34px;
                     font-size: 20px;
                 }
+                select{
+                    padding-right:0px;
+                }
+                select option{
+                    color:rgb(85, 85, 85);
+                }
+                select option:first-child{
+                    display:none;
+                }
+                select.placeholder{
+                    color:#999999;
+                }
+                .phonetype, .phonenumber{
+                    input{
+                        padding-right:0px;
+                    }
+                    .form-control-feedback{
+                        display:none;
+                    }
+                    .form-group{
+                        margin-bottom:0px;
+                    }
+                }
             }
         }
     }
@@ -225,9 +248,13 @@ body.adminpanel{
                     font-size: 20px;
                 }
             }
-            .musician-user{
-                margin-right: -30px;
-                padding-right: 30px;
+            .musician-user{                
+                select{
+                    padding-right:0px;
+                }
+                .form-control-feedback{
+                    display:none;
+                }                
             }
         }
     }

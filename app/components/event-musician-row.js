@@ -30,8 +30,6 @@ export default Ember.Component.extend(EmberValidations, {
 	  this._super();
 	  let musicianUsers = this.get("eventwizard").getMusicianUsers();
 	  this.set("musicianUsers", musicianUsers);
-
-	  console.log(this.get("musicianId"));
 	  let row = musicianUsers.filterBy('id', this.get("musicianId"));
 	  if(row.length == 0){
 	  	this.set("activedmusicianRow", {});

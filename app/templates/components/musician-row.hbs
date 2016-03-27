@@ -1,15 +1,24 @@
 {{#bs-form  model=this action="submit"}}
 <div class="row">
-	  	<div class="col-sm-3">	  		
-	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="FullName" property="name"}}
+	  	<div class="col-sm-2">	  		
+	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="First Name" property="firstName"}}
 	  	</div>
-	  	<div class="col-sm-3">
-	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Phone Number" property="phoneNumber" classNames ="phonenumber"}}
+	  	<div class="col-sm-2">	  		
+	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Last Name" property="lastName"}}
 	  	</div>
 	  	<div class="col-sm-2">
-	  		{{!bs-select content=PhoneServices value=selectedName}}
+	  		{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Phone" property="phoneNumber" classNames ="phonenumber"}}
+	  	</div>
+	  	<div class="col-sm-2 phonetype">
+	  		{{#bs-form-element hasLabel=false label="" property="phoneType" as |phoneType|}}
+				{{bs-form-element controlType="select" hasLabel=false label="" 
+	  			choices=PhoneServices 
+	  			choiceValueProperty="key" 
+	  			choiceLabelProperty="value"
+	  			placeholder="Phone Service" property="phoneTypeRow"}}				
+			{{/bs-form-element}}	
 
-	  		{{bs-form-element controlType="select" hasLabel=false label="" 
+	  		{{!bs-form-element controlType="select" hasLabel=false label="" 
 	  			choices=PhoneServices 
 	  			choiceValueProperty="key" 
 	  			choiceLabelProperty="value"

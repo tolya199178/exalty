@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 	loadding:false,
 	didInsertElement() {		
 	  this._super();
-	  $(this.$()).parents(".modal-dialog").attr("style", "max-width:800px")
+	  $(this.$()).parents(".modal-dialog").attr("style", "width:1000px;max-width:1000px")
 	  let that = this;
 	  //this.set("musicians", this.get("store").findAll("musician"));
 	  let musicians = this.get("store").find("musician",{
@@ -37,7 +37,8 @@ export default Ember.Component.extend({
 			data.removeObject(row);
 		},
 		saveAll(){
-			$("input",this.$()).trigger("blur");
+			//$("input",this.$()).trigger("blur");
+			$("form",this.$()).trigger("submit");
 			let that = this;
 			this.set("loadding", true);
 			Ember.run.later((function() {

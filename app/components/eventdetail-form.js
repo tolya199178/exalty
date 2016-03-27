@@ -95,7 +95,6 @@ export default Ember.Component.extend({
 		},
 
 		backdrop(){
-			console.log(123);
 		},
 
 		save(){

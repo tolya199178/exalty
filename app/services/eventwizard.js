@@ -81,6 +81,9 @@ export default Ember.Service.extend({
 			equalTo:this.get("authorize").getUserId()
 	  	}).then(function(data){
 	  		let rows = data.toArray();
+	  		rows.forEach(function(row){
+	  			row.name = row.get("firstName") + " " + row.get("lastName");
+	  		})
 	  		that.get("musicianUsers").pushObjects(rows);
 	  	});
 	},

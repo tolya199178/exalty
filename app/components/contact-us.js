@@ -45,10 +45,8 @@ export default Ember.Component.extend(EmberValidations, {
 			  title: that.get("title"),
 			  content: that.get("content"),			  
 			  createdAt:(new Date()).valueOf()
-			});
-			console.log(row);
+			});			
 			row.save().then(function(){
-				console.log(123);
 				that.set("loadding", false);
 				that.get("showNotification")("Successfully sent your message", "success");
 				that.get("modalclose")();

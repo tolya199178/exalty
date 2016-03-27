@@ -3,7 +3,8 @@
 	{{#each musician in musicians }}
 		{{musician-row 
 			musician=musician 
-			name=musician.name
+			firstName=musician.firstName
+			lastName=musician.lastName
 			phoneNumber=musician.phoneNumber
 			phoneType=musician.phoneType
 			email=musician.email
@@ -12,17 +13,17 @@
 	</div>
 
 	<div class="">
-		<button class="btn btn-default" {{action "addMusician"}}>
-			<i class="fa fa-plus"></i> &nbsp; Add musician
+		<button class="button default" {{action "addMusician"}}>
+			<i class="fa fa-plus"></i>&nbsp;Add musician
 		</button>
 	</div>
 
 	<br/>
 	<div class="pull-right">
-		<button class="btn btn-default" {{action "closeModal"}}>
+		<button class="button default" {{action "closeModal"}}>
 			Cancel
 		</button>&nbsp;&nbsp;
-		<button class="btn btn-primary" disabled={{loadding}} {{action "saveAll"}}>
+		<button class="button special" disabled={{loadding}} {{action "saveAll"}}>
 			{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
 			Finish
 		</button>
