@@ -6,10 +6,9 @@ export default Ember.Component.extend(EmberValidations, {
 	store: Ember.inject.service(),
 	authorize: Ember.inject.service(),
 	routing: Ember.inject.service(),
-	email: null,
-	oldpassword: null,
-  	password: null,
-  	fullName: null,
+	email: null,	
+  	firstName: null,
+  	lastName: null,
   	loadding:false,
 
   	editCreditcard:false,
@@ -19,26 +18,36 @@ export default Ember.Component.extend(EmberValidations, {
   	cvc:null,
 
 
+  	passwordRequiredModalView:false,
+  	resolve:null,
+
+  	changepasswordModalView:false,
+
+  	crediticardModalView:false,
+
 
   	validations: {
-  		fullName: {
-	      presence: true,	      
+  		firstName: {
+	      presence: true,
+	    },
+	    lastName: {
+	      presence: true,
 	    },
 	    email: {
 	      presence: true,
 	      format: {
 	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
 	        message: 'Invalid email address.'
-	      }
+	      } 
 	    }
   	},
 
   	didInsertElement() {
 		this._super();
-		$(this.$()).parents(".modal-dialog").attr("style", "max-width:600px");		
-		$(".email", this.$()).find("input").attr("readonly", "readonly");
+		$(this.$()).parents(".modal-dialog").attr("style", "max-width:600px");
 		let user = this.get("authorize").getUser();
-		this.set("fullName", user.get("fullName"));
+		this.set("firstName", user.get("firstName"));
+		this.set("lastName", user.get("lastName"));
 		this.set("email", user.get("email"));
 		this.set("password", "");
 
@@ -46,11 +55,21 @@ export default Ember.Component.extend(EmberValidations, {
 		/**
 		 * card
 		 */
+		/*
 		this.set("cardNumber", null);
 		this.set("expireDate", null);
 		this.set("cvc", null);
+		*/
 
 	},
+	getCurrentPassword(){
+		this.set("passwordRequiredModalView", true);
+		let that = this;
+		return new Ember.RSVP.Promise(function(resolve) {
+			that.set("resolve", resolve);
+		})
+	},
+	/*
 	isValidCC(inputNum) {
 	   var digit, digits, flag, sum, _i, _len;
 	    flag = true;
@@ -67,115 +86,90 @@ export default Ember.Component.extend(EmberValidations, {
 	      }      
 	      sum += digit;          
 	    }    
-	    return sum % 10 === 0;
-  	},
+	    return sum % 10 === 0; 
+  	},*/
 	actions:{
-		editCreditCard(){
-			this.set("editCreditcard", true);
-		},
 		saveUser(){
 			let that = this;
 			let user = this.get("authorize").getUser();
-			user.set("fullName", this.get("fullName"));			
-			user.save();
-			this.get("authorize").setUser(user);
-
-			/** 
-			 * Card
-			 */
-			if(this.get("editCreditcard") == true){
-				let cardNumber = this.get("cardNumber");
-				let expireDate =  this.get("expireDate");
-				let cvc =  this.get("cvc");
-				let date = expireDate.split('/')
-				if(!cardNumber || !expireDate || !cvc){
-					$("form", this.$()).find("form").find("input").trigger("blur");
-					return true;
-				}
-				if(this.isValidCC(cardNumber) == false){
-					$("form", this.$()).find("form").find(".cardnumber").addClass("has-error");
-					return true;
-				}
-
-				/**
-				 *Create Card
-				 */				
-				Stripe.setPublishableKey(config.stripePublishableKey);				
-
-				Stripe.card.createToken({			      
-			      'number':cardNumber,
-	              'cvc':cvc,
-	              'exp-month':date[0],
-	              'exp-year':date[1],
-			    }, function(status, response) {
-			    	 console.log(status);
-				      if (response.error) {
-				         console.log(error)
-				      } else {
-				        // token contains id, last4, and card type
-				        var token = response['id'];
-
-				        /**
-				         * Add Card
-				         */
-				        var cardsRef = new Firebase(config.firebase + "/cards");
-						cardsRef.child(that.get("authorize").getUserId()).set({
-							card:token
-						});	
-				    }
-				});				
-			}
-
-			/** 
-			 * Password
-			 */
-
-			let password = this.get("password");
-			if(password){
-				console.log(password)
-				let oldpassword = this.get("oldpassword");
-				let ref = new Firebase(config.firebase);
-				ref.changePassword({
-				  email: user.get("email"),
-				  oldPassword: oldpassword,
-				  newPassword: password
-				}, function(error) {
-				  if (error) {
-				    switch (error.code) {
-				      case "INVALID_PASSWORD":
-				        console.log("The specified user account password is incorrect.");
-				        that.get("showNotification")("The specified user account password is incorrect.", "error");
-				        break;
-				      case "INVALID_USER":
-				        console.log("The specified user account does not exist.");
-				        that.get("showNotification")("The specified user account does not exist.", "error");
-				        break;
-				      default:
-				      	console.log("Error changing password:", error);
-				      	that.get("showNotification")("Error changing password", "error");
-				        
-				    }
-				  } else {
-				    that.get("showNotification")("Successfully saved", "success");
-					Ember.run.later((function(){
-						that.get("modalclose")();
-					}),1000)
-				  }
-				});
-
-			}else{				
+			if(user.get("email") == this.get("email")){
+				user.set("firstName", this.get("firstName"));
+				user.set("lastName", this.get("lastName"));
+				user.set("email", this.get("email"));
+				user.save();
 				that.get("showNotification")("Successfully saved", "success");
 				Ember.run.later((function(){
 					that.get("modalclose")();
 				}),1000)
+			}else{				
+				this.getCurrentPassword().then(function(password){					
+					that.set("loadding", true);
+					let ref = new Firebase(config.firebase);
+					ref.changeEmail({
+					  oldEmail: user.get("email"),
+					  newEmail: that.get("email"),
+					  password: password
+					}, function(error) {
+					  if (error) {
+					    switch (error.code) {
+					      case "INVALID_PASSWORD":
+					        console.log("The specified user account password is incorrect.");
+					        that.get("showNotification")("The specified user account password is incorrect.", "error");
+					        break;
+					      case "INVALID_USER":
+					        console.log("The specified user account does not exist.");
+					        that.get("showNotification")("The specified user account does not exist.", "error");
+					        break;
+					      default:
+					      	console.log("Error creating user:", error);
+					      	that.get("showNotification")("Error creating user", "error");
+					    }
+					  } else {
+					  	user.set("firstName", that.get("firstName"));
+						user.set("lastName", that.get("lastName"));
+						user.set("email", that.get("email"));
+						user.save();
+						that.set("loadding", false);
+					    that.get("showNotification")("Successfully saved", "success");
+						Ember.run.later((function(){
+							that.get("modalclose")();
+						}),1000)
+					  }
+					});
+				})
 			}
+			return true;
 		},
+		closeRequiredPasswordModal(){
+			this.set("passwordRequiredModalView", false);
+		},
+		onInputPassword(password){
+			this.set("passwordRequiredModalView", false);
+			this.get("resolve")(password);
+		},
+		changePassword(){
+			this.set("changepasswordModalView", true);
+		},
+		changePasswordModalClose(){
+			this.set("changepasswordModalView", false);
+		},
+
+		editCreditCard(){
+			this.set("crediticardModalView", true);
+		},
+		creditiCardModalClose(){
+			this.set("crediticardModalView", false);
+		},
+
+		showNotification(message, type){
+			this.get("showNotification")(message, type);
+		},
+
 		deleteAccount(){
 			let that = this;
 			let user = this.get("authorize").getUser();
-			if(confirm("Are you sure")){
-				let oldpassword = this.get("oldpassword");
-				if(oldpassword){
+			if(confirm("Are you sure you want to delete your account? This is irreversible, and you will be unable to recover any of your information.")){
+				this.getCurrentPassword().then(function(oldpassword){
 					let ref = new Firebase(config.firebase);
 					ref.removeUser({
 					   email: user.get("email"),
@@ -203,11 +197,8 @@ export default Ember.Component.extend(EmberValidations, {
 							that.get("routing").transitionTo('landing');
 						}),1000)
 					  }
-					});
-
-				}else{
-					that.get("showNotification")("You should input Current Password", "error");
-				}
+					})
+				})
 			}
 		}
 	}

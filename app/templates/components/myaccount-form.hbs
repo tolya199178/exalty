@@ -1,36 +1,63 @@
-{{#bs-form formLayout="horizontal" model=this action="saveUser"}}
-	{{bs-form-element controlType="text" hasLabel=true label="Account Onwer" placeholder="Full Name" property="fullName"}}
-	{{bs-form-element controlType="email" hasLabel=true label="Email" placeholder="Email" property="email" classNames="email"}}
-	{{bs-form-element controlType="password" hasLabel=true label="Current Password" placeholder="Old Password" property="oldpassword"}}  	
-	{{bs-form-element controlType="password" hasLabel=true label="New Password" placeholder="New Password" property="password"}}  	
-	<br/>
-
-	
-	{{#if-equal param1=editCreditcard param2=false}}
-	<div class="text-center">	
-		<button class="btn btn-default" {{action "editCreditCard"}}>
-			Change Credit Card
-		</button>	
+{{#bs-form model=this action="saveUser"}}	
+	<div class="row">
+		<label class="control-label col-md-4 text-right">Account Onwer</label>
+		<div class="col-sm-4">
+			{{bs-form-element controlType="text" hasLabel=false label="" placeholder="First Name" property="firstName"}}
+		</div>
+		<div class="col-sm-4">
+			{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Last Name" property="lastName"}}
+		</div>		
 	</div>
-	{{/if-equal}}
+	<div class="row">
+		<label class="control-label col-md-4 text-right">Email</label>
+		<div class="col-sm-8">
+			{{bs-form-element controlType="email" hasLabel=false label="" placeholder="Email" property="email" classNames="email"}}
+		</div>		
+	</div>
 
-	{{#if-equal param1=editCreditcard param2=true}}
-		{{crediticard-form cardNumber=cardNumber expireDate=expireDate cvc=cvc }}
-	{{/if-equal}}
-
-
-	<br/>
-	
-	<div class="text-center">	
-		<button class="btn btn-default" {{action "deleteAccount"}}>
-			Delete Account
-		</button>	
+	<div class="row myaccount-button-row">		
+		<div class="col-md-offset-4 col-sm-8">
+			<button class="button default" {{action "changePassword"}}>
+				Change Password
+			</button>		
+		</div>
+	</div>	
+	<div class="row myaccount-button-row">		
+		<div class="col-md-offset-4 col-sm-8">
+			<button class="button default" {{action "editCreditCard"}}>
+				Change Payment Information
+			</button>		
+		</div>
 	</div>
 	<br/>
-	<button class="btn btn-primary pull-right" disabled={{loadding}} type="submit">
-		{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
-		Done
-	</button>
 	<br/>
-	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<button class="button special" {{action "deleteAccount"}}>
+				Delete Account
+			</button>	
+			<button class="button special pull-right" disabled={{loadding}} type="submit">
+				{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+				Save
+			</button>
+		</div>
+	</div>
 {{/bs-form}}
+
+{{#bs-modal title="What is your password" open=passwordRequiredModalView footer=false backdropClose=true}}	
+	{{#if passwordRequiredModalView}}
+		{{required-password-form setpassword=(action "onInputPassword")  modalclose=(action "closeRequiredPasswordModal") }}
+	{{/if}}
+{{/bs-modal}}
+
+{{#bs-modal title="Change Password" open=changepasswordModalView footer=false backdropClose=true}}	
+	{{#if changepasswordModalView}}
+		{{change-password-form modalclose=(action "changePasswordModalClose") showNotification=(action "showNotification")}}
+	{{/if}}
+{{/bs-modal}}
+
+{{#bs-modal title="Change Payment Information" open=crediticardModalView footer=false backdropClose=true}}	
+	{{#if crediticardModalView}}
+		{{crediticard-form modalclose=(action "creditiCardModalClose") showNotification=(action "showNotification")}}
+	{{/if}}
+{{/bs-modal}}

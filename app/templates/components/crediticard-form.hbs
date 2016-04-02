@@ -1,16 +1,27 @@
-<div class="card-form form-group">    
-	<label class="control-label col-md-4">Card</label>
-    <div class="col-md-8">
-            {{#bs-form  model=this action="submit"}}
-				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Card Number" property="cardNumber" classNames ="cardnumber"}}
-				<div class="row">
-					<div class="col-md-4">
-						{{bs-form-element controlType="text" hasLabel=false label="" placeholder="MM/YY" property="expireDate" classNames ="expiredate"}}
-					</div>
-					<div class="col-md-offset-2 col-md-4">
-						{{bs-form-element controlType="text" hasLabel=false label="" placeholder="CVC" property="cvc"}}
-					</div>
-				</div>
-			{{/bs-form}}
-    </div>
-</div>
+{{#bs-form  model=this action="onsubmit"}}
+	<div class="row">
+		<div class="col-md-10">
+			{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Card Number" property="cardNumber" classNames ="cardnumber"}}
+		</div>	
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			{{bs-form-element controlType="text" hasLabel=false label="" placeholder="MM/YY" property="expireDate" classNames ="expiredate"}}
+		</div>
+		<div class="col-md-4">
+			{{bs-form-element controlType="text" hasLabel=false label="" placeholder="CVC" property="cvc"}}
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="pull-right">
+			<button class="button default" {{action "close"}}>
+				Cancel
+			</button>&nbsp;&nbsp;
+			<button class="button special" disabled={{loadding}} type="submit">				
+				{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
+				Save
+			</button>			
+		</div>
+	</div>	
+{{/bs-form}}

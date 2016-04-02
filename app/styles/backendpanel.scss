@@ -288,6 +288,10 @@ body.adminpanel{
     /**
      * My account
      */
+     .myaccount-button-row{
+        margin-bottom:10px;
+     }
+
     .card-form{
         margin-left: 0px;
         margin-top: 0px;
@@ -299,6 +303,7 @@ body.adminpanel{
             padding-right: 13px;
         }
     }
+
 
     /**
      * Date picker
