@@ -3,6 +3,7 @@ import EmberValidations from 'ember-validations';
 
 export default Ember.Component.extend(EmberValidations, {
 	eventwizard:Ember.inject.service(),
+	eventService: Ember.inject.service(),
 	event:null,
 	title: null,
 	date:null,
@@ -34,6 +35,14 @@ export default Ember.Component.extend(EmberValidations, {
 		this.set("date", event.get("date"));		
 		this.set("startTime", event.get("startTime"));
 		this.set("endTime", event.get("endTime"));
+
+		let editMode = this.get("eventwizard").getEditMode();
+		if(editMode == "update"){
+			this.set("showDeleteButton", true);
+		}else{
+			this.set("showDeleteButton", false);
+		}		
+
 		let dateValue = event.get("date");
 		if(dateValue){
 			this.set("dateAlias", moment(dateValue).toDate());
@@ -50,6 +59,26 @@ export default Ember.Component.extend(EmberValidations, {
 			let modal = this.get("modal");
 			Ember.set(modal, "modalTitle", "Schedule Event");
 			Ember.set(modal, "modalTemplete", "eventdetail-form");
+		},
+		deleteEvent(){
+			let that = this;
+			this.set("deleting", true);
+			let serviceItems = this.get("eventwizard").getServiceItems();
+			serviceItems.forEach(function(row){
+				row.destroyRecord();
+			})
+			let musicianItems = this.get("eventwizard").getMusicianItems();
+			musicianItems.forEach(function(row){
+				row.destroyRecord();
+			})
+			let event = this.get("eventwizard").getEvent();
+			event.destroyRecord()
+			this.get("showNotification")("Successfully deleted", "success");
+			Ember.run.later((function() {
+				that.get("eventService").updateEvent();				
+				that.get("modalclose")();
+			}), 1000)
+			
 		},
 		closeModal(){			
 			this.get("modalclose")();

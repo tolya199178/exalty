@@ -5,15 +5,17 @@ export default Ember.Service.extend({
 	serviceItems:Ember.A([]),
 	musicians:[],
 	musicianUsers:[],
+	editMode:"create",
 	store: Ember.inject.service(),
 	authorize: Ember.inject.service(),
 	initObj(eId){
 		let that = this;
 		this.set("event", null);
 		this.set("serviceItems", Ember.A([]));
-		this.set("musicians", Ember.A([]));
+		this.set("musicians", Ember.A([]));		
 		this.setMusicianUsers();
 		if(!eId){
+			this.set("editMode", "create");
 			/* create mode*/
 			let event = this.get("store").createRecord("event",{
 				userId:this.get("authorize").getUserId(),
@@ -21,6 +23,7 @@ export default Ember.Service.extend({
 			})
 			this.set("event", event);
 		}else{
+			this.set("editMode", "update");
 			return new Ember.RSVP.Promise(function(resolve) {
 
 				//getEvent
@@ -89,5 +92,8 @@ export default Ember.Service.extend({
 	},
 	getMusicianUsers(){
 		return this.get("musicianUsers");
+	},
+	getEditMode(){
+		return this.get("editMode");	
 	}
 });
