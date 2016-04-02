@@ -3,7 +3,8 @@ import config from '../config/environment';
 import EmberValidations from 'ember-validations';
 
 export default Ember.Component.extend(EmberValidations, {
-	store: Ember.inject.service(),	
+	store: Ember.inject.service(),
+	routing: Ember.inject.service(),
 	email: null,
   	password: null,
   	firstname: null,
@@ -65,9 +66,8 @@ export default Ember.Component.extend(EmberValidations, {
 				  email: that.get("email"),
 				  userId:userData.uid,
 				  createdAt:(new Date()).valueOf()
-				});
+				});				
 				user.save().then(function(){
-					that.set("loadding", false);
 					/**
 					 *Create customer
 					 */
@@ -75,11 +75,32 @@ export default Ember.Component.extend(EmberValidations, {
 	                customerRef.child(userData.uid).set({
 									email: that.get("email"),
 									description: 'Customer for ' + that.get("email")
-								});	                
-					Ember.run.later((function() {					
-						that.get("modalclose")();					
-					}), 1000)
-	                that.get("showNotification")("Successfully created user account", "success");
+								});
+	                console.log("Auto Login");
+	                /**
+	                 * Auto Login
+	                 */
+	                let ref = new Firebase(config.firebase);
+		  			ref.unauth();
+					ref.authWithPassword({
+					  "email": that.get("email"),
+					  "password": that.get("password"),
+					}, function(error, authData) {
+					  console.log(arguments);
+					  that.set("loadding", false);
+					  if (error) {
+					    console.log("Login Failed!  Incorrect username or password", error);
+					    that.get("showNotification")("Login Failed! Incorrect username or password", "error");
+					  } else {
+					  	that.get("showNotification")("Successfully created user account", "success");
+					  	Ember.run.later((function() {
+					  		that.get("modalclose")();
+							that.get('routing').transitionTo('app');
+						}), 1000)
+					  }
+					});
+					
+	                
 				});
 			  }
 			});
