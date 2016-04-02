@@ -148,7 +148,11 @@ export default Ember.Component.extend({
 			  }
 			}), 1000);	
 		},
-
+		back(){
+			let modal = this.get("modal");
+			Ember.set(modal, "modalTitle", "Schedule Event");
+			Ember.set(modal, "modalTemplete", "event-form");
+		},
 		closeModal(){
 			this.get("modalclose")();
 		}
