@@ -27,6 +27,7 @@ export default Ember.Component.extend({
 		this.set("musicianItems", this.get("eventwizard").getMusicianItems());
 		this.set("deletedServiceItems", []);
 		this.set("deletedMusicianItems", []);
+		$(".serviceitem-rows>div").removeAttr("draggable");
 	},
 	actions:{
 		/**
@@ -37,6 +38,7 @@ export default Ember.Component.extend({
 					eventId:this.get("event").get("id"),
 					itemType:"service",
 					userId:this.get("authorize").getUserId(),
+					order:10000,
 					createdAt:(new Date()).valueOf()
 				})
 			let data = this.get("serviceItems")
@@ -52,6 +54,7 @@ export default Ember.Component.extend({
 					eventId:this.get("event").get("id"),
 					itemType:"song",
 					userId:this.get("authorize").getUserId(),
+					order:10000,
 					createdAt:(new Date()).valueOf()
 				})
 			this.set("activedSong", row);
@@ -92,6 +95,18 @@ export default Ember.Component.extend({
 			let data = this.get("musicianItems");
 			this.get("deletedMusicianItems").pushObject(row);
 			data.removeObject(row);
+		},
+
+		/**
+		 * Sort EndAction
+		 */
+		sortEndAction(){
+			let serviceItems = this.get("serviceItems");
+			let index = 0;
+			serviceItems.forEach(function(row){
+				row.set("order", index);
+				index++;
+			})			
 		},
 
 		backdrop(){

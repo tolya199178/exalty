@@ -45,7 +45,7 @@ export default Ember.Service.extend({
 							orderBy: 'eventId',
 							equalTo:eId 
 						}).then(function(res){
-							let  serviceItems = res.toArray();
+							let  serviceItems = res.toArray().sortBy("order");
 							that.set("serviceItems", serviceItems);
 
 							//getMusician

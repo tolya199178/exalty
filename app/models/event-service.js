@@ -7,5 +7,6 @@ export default DS.Model.extend({
   youtubeUrl: DS.attr('string'),
   chordsUrl: DS.attr('string'),
   userId: DS.attr('string'),
+  order: DS.attr('number'),
   createdAt: DS.attr('number')
 });

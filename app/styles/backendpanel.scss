@@ -199,6 +199,16 @@ body.adminpanel{
             padding-bottom: 6px;
             margin-bottom:5px;
             margin-left:0px;
+            .dragHandle{
+                position: absolute;
+                left: 7px;
+                width:12px;
+                height: 34px;
+                z-index:12;
+                background-image: url("images/drag-hander.png");
+                background-position: right center;
+                background-repeat: no-repeat;
+            }
             .form-group {
                 margin-bottom:0px;
             }

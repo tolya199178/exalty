@@ -1,21 +1,29 @@
 {{#bs-form  model=this action="" classNames ="musician-form"}}	
 	<!-- Service Item Rows -->
 	<div class="serviceitem-rows">
-		{{#each serviceItem in serviceItems}}
-			{{#if-equal param1=serviceItem.itemType param2="service"}}
-				{{event-serviceitem-row
-					serviceItem=serviceItem
-					title=serviceItem.title
-					removeServiceItem=(action "removeServiceItem")}}
-			{{/if-equal}}
-			{{#if-equal param1=serviceItem.itemType param2="song"}}
-				{{event-servicesong-row
-					serviceItem=serviceItem
-					title=serviceItem.title
-					editSong=(action "editSong")
-					removeServiceItem=(action "removeServiceItem")}}
-			{{/if-equal}}
-		{{/each}}
+		{{#draggable-object-target overrideClass='my-new-class-name'}}
+		{{/draggable-object-target}}
+
+		{{#sortable-objects sortableObjectList=serviceItems  enableSort=true  sortEndAction='sortEndAction'}}
+		  {{#each serviceItem in serviceItems}}
+				{{#draggable-object content=serviceItem isSortable=true  dragHandle='.js-dragHandle'}}					
+				  {{#if-equal param1=serviceItem.itemType param2="service"}}
+					{{event-serviceitem-row
+							serviceItem=serviceItem
+							title=serviceItem.title
+							removeServiceItem=(action "removeServiceItem")}}
+					{{/if-equal}}
+					{{#if-equal param1=serviceItem.itemType param2="song"}}
+						{{event-servicesong-row
+							serviceItem=serviceItem
+							title=serviceItem.title
+							editSong=(action "editSong")
+							removeServiceItem=(action "removeServiceItem")}}
+					{{/if-equal}}
+				{{/draggable-object}}			
+			{{/each}}
+		{{/sortable-objects}}
+		
 	</div>	
 	<div class="button-row">
 		<button class="button default" {{action "addService"}}>
