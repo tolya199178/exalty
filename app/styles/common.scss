@@ -28,3 +28,33 @@
 		max-width:300px;
 	}
 }
+
+/**
+ * Radio button customize
+ */
+.ember-radio-button{
+	input[type=radio] {
+	    display: none;
+	}
+	padding-left: 30px;
+    margin-right: 15px;
+    margin-top: 3px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+	&:before{
+		content: "";
+    	display: inline-block; 
+	    width: 25px;
+	    height: 25px;	 
+	    margin-right: 10px;
+	    position: absolute;
+	    left: 0;
+	    bottom: 1px;	    
+	    background-image: url("images/uncheck.png");
+	    background-size: 100% 100%;
+	}
+	&.checked:before{
+		background-image: url("images/check.png");
+	}
+}

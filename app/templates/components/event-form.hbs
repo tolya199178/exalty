@@ -1,25 +1,112 @@
 {{#bs-form  model=this action="next"}}	
 	<div class="event-form">
 		<div class="row">
-			<div class="col-md-offset-1 col-md-10">
+			<div class="col-md-offset-3 col-md-6">
 				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Event Name" property="title"}}
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-offset-1 col-md-6">
+			<div class="col-md-offset-3 col-md-3">
 				{{#bs-form-element hasLabel=false label="" property="dateAlias" as |dateAlias|}}
 					{{bootstrap-datepicker autoclose=true placeholder="Date" class="form-control" value=dateAlias}}
 				{{/bs-form-element}}	
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-offset-1 col-md-5">
+		<div class="row start-time duration">
+			<div class="col-md-3 text-right">
+				Start Time
+			</div>			
+			<div class="col-md-2">
+				{{#bs-form-element hasLabel=false label="" property="startHour" classNames ="starthour"}}
+					{{bs-form-element controlType="select" hasLabel=false label="" 
+			  			choices=hours 
+			  			choiceValueProperty="key" 
+			  			choiceLabelProperty="value"
+			  			classNames ="placeholder"
+			  			placeholder="" property="startHourRow"}}
+				{{/bs-form-element}}
+			</div>
+			<div class="col-md-2 minutes">
+				{{#bs-form-element hasLabel=false label="" property="startMinute" classNames ="startminute"}}
+					{{bs-form-element controlType="select" hasLabel=false label="" 
+			  			choices=minutes 
+			  			choiceValueProperty="key" 
+			  			choiceLabelProperty="value"
+			  			classNames ="placeholder"
+			  			placeholder="" property="startMinuteRow"}}
+				{{/bs-form-element}}
+			</div>
+			<div class="col-md-2">
+				{{#radio-button
+				    value="AM"
+				    groupValue=start_half}}
+				    AM
+				{{/radio-button}}
+			</div>
+
+			<div class="col-md-2 pm">
+				{{#radio-button
+				    value="PM"
+				    groupValue=start_half}}
+				    PM
+				{{/radio-button}}
+			</div>
+		</div>
+
+		<!--div class="row end-time duration"-->
+			{{#bs-form-element hasLabel=false label="" property="durationValidtion" classNames ="row end-time duration"}}
+				<div class="col-md-3 text-right">
+					End Time
+				</div>			
+				<div class="col-md-2">
+					{{#bs-form-element hasLabel=false label="" property="endHour" classNames ="endhour"}}
+						{{bs-form-element controlType="select" hasLabel=false label="" 
+				  			choices=hours 
+				  			choiceValueProperty="key" 
+				  			choiceLabelProperty="value"
+				  			classNames ="placeholder"
+				  			placeholder="" property="endHourRow"}}
+					{{/bs-form-element}}
+				</div>
+				<div class="col-md-2 minutes">
+					{{#bs-form-element hasLabel=false label="" property="endMinute" classNames ="endminute"}}
+						{{bs-form-element controlType="select" hasLabel=false label="" 
+				  			choices=minutes 
+				  			choiceValueProperty="key" 
+				  			choiceLabelProperty="value"
+				  			classNames ="placeholder"
+				  			placeholder="" property="endMinuteRow"}}
+					{{/bs-form-element}}
+				</div>
+				<div class="col-md-2">
+					{{#radio-button
+					    value="AM"
+					    groupValue=end_half}}
+					    AM
+					{{/radio-button}}
+				</div>
+
+				<div class="col-md-2 pm">
+					{{#radio-button
+					    value="PM"
+					    groupValue=end_half}}
+					    PM
+					{{/radio-button}}
+				</div>
+			{{/bs-form-element}}
+		<!--/div-->
+
+
+		
+
+		<!--div class="row">
+			<div class="col-md-offset-3 col-md-5">
 				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="Start Time" property="startTime" classNames ="starttime"}}
 			</div>			
 			<div class="col-md-5">
 				{{bs-form-element controlType="text" hasLabel=false label="" placeholder="End Time" property="endTime" classNames ="endTime"}}
 			</div>			 
-		</div>
+		</div-->
 	</div>
 	<div class="row">
 		<div class="pull-left">
