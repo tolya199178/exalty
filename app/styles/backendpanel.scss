@@ -358,3 +358,30 @@ body.adminpanel{
         }   
     }
 }
+body.fademodal{
+    .calendar-container{
+        color: transparent;
+        text-shadow: rgba(0, 0, 0, 0.5) 0px 0px 3px;
+    }
+    header{
+        a{
+            color: transparent !important;
+            text-shadow: rgba(255, 255, 255, 0.5) 0px 0px 3px;
+        }
+    }
+    #dashboard-menu{
+        a{
+            color: transparent !important;
+            text-shadow: rgba(255, 255, 255, 0.5) 0px 0px 3px;   
+        }
+    }
+    div.fc-content{
+        color: transparent !important;
+        text-shadow: rgba(255, 255, 255, 0.5) 0px 0px 2px;   
+    }
+    .modal-content{
+        button.close{
+            display:none;
+        }
+    }
+}

@@ -12,3 +12,8 @@
 {{#if loading}}
 	{{loading-container}}
 {{/if}}
+{{#bs-modal title="Change Payment Information" open=crediticardModalView footer=false backdropClose=false}}	
+	{{#if crediticardModalView}}
+		{{crediticard-form requiredcard=true modalclose=(action "creditiCardModalClose") showNotification=(action "showNotification")}}
+	{{/if}}
+{{/bs-modal}}

@@ -12,12 +12,21 @@
 			{{bs-form-element controlType="text" hasLabel=false label="" placeholder="CVC" property="cvc"}}
 		</div>
 	</div>
+	{{#if requiredcard}}
+		<div class="row">
+			<div class="col-md-12">
+				Your account is due for payment. Please enter in a valid card to maintain access.
+			</div>
+		</div>	
+	{{/if}}	
 	<br/>
 	<div class="row">
 		<div class="pull-right">
-			<button class="button default" {{action "close"}}>
-				Cancel
-			</button>&nbsp;&nbsp;
+			{{#if accouneEdit}}
+				<button class="button default" {{action "close"}}>
+					Cancel
+				</button>&nbsp;&nbsp;
+			{{/if}}
 			<button class="button special" disabled={{loadding}} type="submit">				
 				{{#if loadding}}<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;{{/if}}
 				Save
