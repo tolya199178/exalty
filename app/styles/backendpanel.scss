@@ -130,6 +130,27 @@ body.adminpanel{
                     }
                 }
             }
+            .notification-contianer{
+                position: absolute;
+                bottom: 30px;
+                margin-right: 2.5em;
+                padding: 8px 8px;
+                background-color: white;
+                color:rgb(51, 51, 51);
+                .close-alert{
+                    position: absolute;                    
+                    bottom: 100%;
+                    right: 0px;
+                    background: white;
+                    width: 25px;
+                    height: 25px;
+                    text-align: center;
+                    a{
+                        line-height: 25px;
+                        color: red;
+                    }
+                }
+            }
         }
     }
 

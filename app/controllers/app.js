@@ -12,12 +12,24 @@ export default Ember.Controller.extend({
 	loading:false,
 
 	crediticardModalView:false,
+	showAlert:false,
+	alertText:null,
+	showdisalbealertbtn:false,
+
+
+	trial_end:null,
+	card:null,
+
 
 	init(){
 		let that = this;
 		this.get("eventService").initObj();
 		this.get("eventService").addObserver("eventCalendarData", function(evnets){
 			that.set("eventData", that.get("eventService").get("eventCalendarData"));
+			that.setAlert(that);
+		});
+		this.get("eventService").addObserver("musicians", function(){
+			that.setAlert(that);			
 		});
 
 		/**
@@ -35,20 +47,24 @@ export default Ember.Controller.extend({
 		    let data = snapshot.val();
 		    if(data && data.length){
 		    	plan = data[data.length-1];
-		    	cardsRef.on("value", function(snapshot) {
-		    		if(card){
-		    			return true;
-		    		}
+		    	that.set("trial_end", plan.trial_end);		    	
+
+		    	cardsRef.on("value", function(snapshot) {		    		
 				    let data = snapshot.val();
+				    let row = null
 				    if(data && data.length){
-				    	card = data[data.length-1];
+				    	row = data[data.length-1];
 				    }else{
-
+				    	row = null;
 				    }
-				    let trialEnd = moment(plan.current_period_end*1000);
+				    that.set("card", row);
+				    that.setAlert(that);
 
-				    that.get("requirePayment")(that);
-
+				    if(card){
+				    	return true;
+				    }
+				    let trialEnd = moment(plan.trial_end*1000);
+				    card = row;
 				    if(moment().diff(trialEnd) > 0){
 				    	/*ended trial period*/
 				    	if(!card 
@@ -72,6 +88,44 @@ export default Ember.Controller.extend({
 		}, function (errorObject) {
 		  console.log("The read failed: " + errorObject.code);
 		});
+	},
+	setAlert(that){
+		that.set("showdisalbealertbtn", false);
+		let musicians = that.get("eventService").get("musicians");
+		if(musicians.length == 0){
+			that.set("showAlert", true);
+			that.set("alertText", "Congratulations! You're about to make leading worship a lot easier. Get Started by adding in a few of your musicians, using the \"Create/Manage Musicians\" option above. Try adding yourself first, as a test.");
+			return true;
+		}
+
+		let event = that.get("eventService").get("events");
+		if(event.length == 0){
+			that.set("showAlert", true);
+			that.set("alertText", "Now that you have musicians in the system, try creating an event using the \"Schedule an Evnet\" option above. Try booking yourself playing a song or two, then hit \"Finish\" to send yourself a notification.");
+			return true;
+		}
+
+		let user = that.get("authorize").getUser();
+		if(!user.get("disalbeAlert")){
+			that.set("showAlert", true);
+			that.set("showdisalbealertbtn", true);
+			that.set("alertText", "You've done it! Wasn't that easy? We'll let you take it from here. Add in the other members of your team(s) and start scheduling! Let them know of your new system, and they'll start practicing what you send them.");
+			return true;
+		}
+
+		
+		if(that.get("trial_end") && !that.get("card")){
+			let diff = moment().diff(moment(that.get("trial_end")*1000), "days")*(-1);			
+			if(diff <= 15 && diff>=0){
+				that.set("showAlert", true);
+				that.set("alertText", "You have " + diff + " days remaining on your free trial. Add a credit card in \"My Account\" to prevent loss of account access.");
+				return true;
+			}			
+		}
+
+		that.set("showAlert", false);
+		that.set("alertText", "");
+
 	},
 	requirePayment(that){
 		that.set("crediticardModalView", true);
@@ -118,6 +172,12 @@ export default Ember.Controller.extend({
 		},
 		creditiCardModalClose(){
 			this.set("crediticardModalView", false);
+		},
+		hideAlert(){
+			let user = this.get("authorize").getUser();
+			user.set("disalbeAlert", 1);
+			user.save();
+			this.get("setAlert")(this);
 		}
 	}
 });

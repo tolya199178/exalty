@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 	store: Ember.inject.service(),
 	authorize: Ember.inject.service(),
+	eventService: Ember.inject.service(),
 	musicians:[],
 	deletedMusicians:[],
 	loadding:false,
@@ -11,6 +12,7 @@ export default Ember.Component.extend({
 	  $(this.$()).parents(".modal-dialog").attr("style", "width:1000px;max-width:1000px")
 	  let that = this;
 	  //this.set("musicians", this.get("store").findAll("musician"));
+	  that.set("deletedMusicians",[]);
 	  let musicians = this.get("store").find("musician",{
 	  	orderBy: 'userId',
 		equalTo:this.get("authorize").getUserId()
@@ -55,6 +57,7 @@ export default Ember.Component.extend({
 					row.save();
 				})
 				that.get("showNotification")("Successfully saved", "success");
+				that.get("eventService").updateMusicians(data);
 				Ember.run.later((function(){
 						that.get("modalclose")();
 					}),1000)

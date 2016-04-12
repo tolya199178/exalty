@@ -5,5 +5,15 @@
         <li><a href="#3" {{action 'myAccount'}}>My account</a></li>
         <li><a href="#3" {{action 'contactus'}}>Contact us</a></li>
         <li><a href="#3" {{action 'logout'}}>Log out</a></li>
-    </ul>
+    </ul>    
 </div>
+{{#if showAlert}}
+<div class="notification-contianer">
+	{{#if showdisalbealertbtn}}
+		<div class="close-alert">
+			<a class="remove" href="#" {{action "hideAlert"}}><i class="fa fa-times"></i></a>
+		</div>
+	{{/if}}	
+    {{alertText}}
+</div>
+{{/if}}

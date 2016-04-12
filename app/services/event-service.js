@@ -25,6 +25,9 @@ export default Ember.Service.extend({
 		this.set("events", []);
 		this.set("eventCalendarData", []);
 		this.updateEvent();
+
+		this.set("musicians", []);		
+		this.updateMusicians();
 	},
 	updateEvent(){
 		let that= this;
@@ -35,5 +38,19 @@ export default Ember.Service.extend({
 				let events = res.toArray();
 				that.set("events", events);
 			});
+	},
+	updateMusicians(rows){		
+		let that= this;
+		if(rows){
+			that.set("musicians", rows);
+		}else{
+			this.get("store").query("musician",{
+					orderBy: 'userId',
+					equalTo:that.get("authorize").getUserId()
+				}).then(function(res){
+					let musicians = res.toArray();				
+					that.set("musicians", musicians);
+				});
+		}		
 	}
 });
