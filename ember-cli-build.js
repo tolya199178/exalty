@@ -10,6 +10,8 @@ module.exports = function(defaults) {
   });
 
   app.import('bower_components/jquery.maskedinput/dist/jquery.maskedinput.js');
+  app.import('bower_components/moment-timezone/builds/moment-timezone-with-data.js');
+
 
   // Use `app.import` to add additional libraries to the generated
   // output files.

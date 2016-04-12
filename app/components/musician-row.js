@@ -4,22 +4,33 @@ import EmberValidations from 'ember-validations';
 export default Ember.Component.extend(EmberValidations, {	
 	PhoneServices: Ember.A([
 							{key:"",value:"Carrier"},
-							{key:"Verizon",value:"Verizon"},
-							{key:"T-Mobile",value:"T-Mobile"},
-							{key:"Virgin-Mobile",value:"Virgin Mobile"},
-							{key:"AT&T",value:"AT&T"},
-							{key:"Tracfone",value:"Tracfone"}
+							{key:"vtext.com",value:"Verizon"},
+							{key:"tmomail.net",value:"T-Mobile"},
+							{key:"vmobl.com",value:"Virgin Mobile"},
+							{key:"txt.att.net",value:"AT&T"},
+							{key:"mmst5.tracfone.com",value:"Tracfone"},
+							{key:"number@tmomail.net",value:"T-Mobile"},
+							{key:"messaging.sprintpcs.com",value:"Sprint"},
+							{key:"mymetropcs.com",value:"Metro PCS"},
+							{key:"myboostmobile.com",value:"Boost Mobile"},
+							{key:"sms.mycricket.com",value:"Cricket"},
+							{key:"messaging.nextel.com",value:"Nextel"},
+							{key:"number@message.alltel.com",value:"Alltel"},
+							{key:"ptel.com",value:"Ptel"},
+							{key:"tms.suncom.com",value:"Suncom"},
+							{key:"qwestmp.com",value:"Qwest"},
+							{key:"email.uscc.net",value:"U.S. Cellular"}
 						]),
 	email: null,  	
   	firstName: null,
   	lastName: null,
   	phoneNumber: null,
-  	phoneNumberChanged: Ember.observer('phoneNumber', function() {  		
+  	/*phoneNumberChanged: Ember.observer('phoneNumber', function() {  		
   	   let number  = this.get("phoneNumber");  	   
   	   if(number == "(___)___-____"){
   	   		this.set("phoneNumber", null);
   	   }
-	}),
+	}),*/
   	phoneType: null,
   	phoneTypeRow:{},
   	phoneTypeRowChanged: Ember.observer('phoneTypeRow', function() {  		
@@ -40,17 +51,21 @@ export default Ember.Component.extend(EmberValidations, {
 	      presence: true,
 	    },
 	    email: {
-	      presence: true,
 	      format: {
+	      	allowBlank: true,
 	        with: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
 	        message: 'Invalid email address.'
 	      }
 	    },	    
 	    phoneType: {
 	    	presence:{
-			    'if': function(that, validator) {			    	
+			    'if': function(that, validator) {
+			    	let number  = that.get("phoneNumber");  	   
+					if(number == "(___)___-____"){
+				  		that.set("phoneNumber", null);
+				  	}			    	
 			    	let phoneNumber = that.get("phoneNumber");
-			    	if(phoneNumber){
+			    	if(phoneNumber && phoneNumber){
 			    		return true;
 			    	}else{
 			    		return false;

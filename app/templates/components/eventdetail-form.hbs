@@ -74,3 +74,9 @@
 		{{songdetail-form song=activedSong mode=songEditMode  addsong=(action "addSongItem")  modalclose=(action "closeSongModal") }}
 	{{/if}}
 {{/bs-modal}}
+
+{{#bs-modal title="Send Notification" open=openNotificationModal footer=false backdropClose=handback}}	
+	{{#if openNotificationModal}}
+		{{settingnotification-form  musicianItems=musicianItems send1=(action "sendNotification") notsend1=(action "notSendNotifcation")}}
+	{{/if}}
+{{/bs-modal}}

@@ -15,9 +15,9 @@ export default Ember.Component.extend(EmberValidations, {
 		let userId = this.get("authorize").getUserId();
 		let cardsRef = new Firebase(config.firebase + "/customers/" + userId + "/sources/data");
 		cardsRef.on("value", function(snapshot) {
-		    let data = snapshot.val();		   
-		    let length = data.length;
-		    if(length){
+		    let data = snapshot.val();
+		    if(data && data.length){
+		    	let length = data.length;
 		   		let row = data[length-1];
 		   		let last4 = row.last4;
 		   		that.set("cardNumber", "************" + last4);

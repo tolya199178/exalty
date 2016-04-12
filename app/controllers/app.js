@@ -27,11 +27,10 @@ export default Ember.Controller.extend({
 			});
 		},
 		dayClicked(date, jsEvent, view){
-			let clickedDate = date._d;
-			console.log(clickedDate);
+			let clickedDate = date._d;			
 			this.get("eventwizard").initObj();
 			let event = this.get("eventwizard").get("event");
-			event.set("date", moment(clickedDate).format("YYYY-MM-DD"));
+			event.set("date", moment(clickedDate).tz("Europe/London").format("YYYY-MM-DD"));
 			this.get("eventwizard").setEvent(event);
 			this.get("applicationController").send("showModal", "Schedule Event", "event-form", false);
 			

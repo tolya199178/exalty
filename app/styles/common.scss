@@ -58,3 +58,48 @@
 		background-image: url("images/check.png");
 	}
 }
+.embercheck{
+	.checkbox{
+	    margin-top: 0px;
+    	margin-bottom: 0px;		
+		label{
+			input[type=checkbox] {
+			    display: none;
+			}
+			padding-left: 30px;
+		    margin-right: 15px;
+		    margin-top: 3px;
+		    display: inline-block;
+		    cursor: pointer;
+		    position: relative;
+			&:before{
+				content: "";
+		    	display: inline-block; 
+			    width: 25px;
+			    height: 25px;	 
+			    margin-right: 10px;
+			    position: absolute;
+			    left: 0;
+			    bottom: 1px;	    
+			    background-image: url("images/uncheck_checkbox.png");
+			    background-size: 100% 100%;
+			}			
+		}
+	}	
+	&.checked{
+		label{						
+			&:before{
+				background-image: url("images/check_checkbox.png");
+			}
+		}
+	}
+	&.disabled{
+		label{
+		    opacity: 0.3;
+			pointer-events:none;
+			input{
+				pointer-events:none;
+			}
+		}
+	}
+}

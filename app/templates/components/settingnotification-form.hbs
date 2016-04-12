@@ -1,0 +1,24 @@
+{{#bs-form classNames="notification-form" model=this action="save"}}	
+	<div class="notification-setting-rows">
+		{{#each musicianitem in musicianItems }}
+			{{notifiation-setting-row
+				musician=musicianitem 
+				musicianId=musicianitem.musicianId
+				musicianDesc=musicianitem.musicianDesc
+				clickCheckbox=(action "clickCheckbox")}}
+		{{/each}}
+	</div>
+	<br>
+	<br>
+	<div class="row">
+		<div class="pull-right">			
+			<button class="button default" {{action "notsendaction"}}>
+				Don't send
+			</button>&nbsp;&nbsp;
+			<button class="button special" disabled={{disableSendButton}} {{action "sendaction"}}>
+				send
+			</button>
+		</div>
+	</div>
+
+{{/bs-form}}
