@@ -2,7 +2,7 @@ import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 
 export default Ember.Component.extend(EmberValidations, {
-	title:null,	
+	title:null,
 	validations: {
   		title: {
 	      presence: true,

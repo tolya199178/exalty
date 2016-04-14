@@ -115,10 +115,10 @@ export default Ember.Component.extend({
 					}else if(row.get("itemType") == "song"){
 						emailContent += row.get("title");
 						if(row.get("youtubeUrl")){
-							emailContent += ' <a href="'+row.get("youtubeUrl")+'">Listen</a>';
+							emailContent += ' <a href="'+row.get("fullYoutubeUrl")+'">Listen</a>';
 						}
 						if(row.get("chordsUrl")){
-							emailContent += ' <a href="'+row.get("Chords")+'">Listen</a>';
+							emailContent += ' <a href="'+row.get("fullChordsUrl")+'">Listen</a>';
 						}
 						emailContent +=  "<br/>";
 					}

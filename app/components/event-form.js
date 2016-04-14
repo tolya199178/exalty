@@ -114,7 +114,7 @@ export default Ember.Component.extend(EmberValidations, {
   	 * Duration Selector
   	 */
 	hours: Ember.A([
-					{key:"",value:"Hours"},
+					{key:"",value:"Hour"},
 					{key:"1",value:"1"},
 					{key:"2",value:"2"},
 					{key:"3",value:"3"},
