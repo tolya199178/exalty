@@ -181,3 +181,10 @@ export default Ember.Controller.extend({
 		}
 	}
 });
+
+
+$(document).on("keydown", function (event) {	
+	if ((event.which === 8 || event.which === 46) && !$(event.target).is("input, textarea")) {
+		event.preventDefault();
+	}
+});
