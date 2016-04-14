@@ -93,10 +93,10 @@ export default Ember.Component.extend({
 			/**-----Email Conent------**/
 			emailContent = "Event: " + eventRow.get("title") + ",";
 			if(evnetStartTime.isValid()){
-				emailContent += " "  + evnetStartTime.format("h:m A");
+				emailContent += " "  + evnetStartTime.format("h:mm A");
 			}
 			if(evnetEndTime.isValid()){
-				emailContent += "-"  + evnetEndTime.format("h:m A");
+				emailContent += " - "  + evnetEndTime.format("h:mm A");
 			}
 			emailContent += "<br/><br/><br/>";
 			if(musicianItems.length > 0){
@@ -108,7 +108,7 @@ export default Ember.Component.extend({
 			}
 
 			if(serviceItems.length > 0){
-				emailContent += "Order of Events:<br/>";
+				emailContent += "ORDER OF EVENTS:<br/>";
 				serviceItems.forEach(function(row){
 					if(row.get("itemType") == "service"){
 						emailContent += row.get("title") + "<br/>";
@@ -129,10 +129,10 @@ export default Ember.Component.extend({
 			/**-----Text Conent------**/
 			textContnet += "Your worship team scheduled you for "+ evnetDate.format("M/D");
 			if(evnetStartTime.isValid()){
-				textContnet += "@"  + evnetStartTime.format("h:m A");
+				textContnet += " @ "  + evnetStartTime.format("h:m A");
 			}
 			if(evnetEndTime.isValid()){
-				textContnet += "-"  + evnetEndTime.format("h:m A");
+				textContnet += " - "  + evnetEndTime.format("h:m A");
 			}
 			textContnet += ".";
 			textContnet += "Check your email for details! If this was sent in error, email " + accountEmail + "."
@@ -278,21 +278,18 @@ export default Ember.Component.extend({
 				if($(".has-error",that.$()).length>0){
 				  	return true;
 				}
-				let editMode = that.get("eventwizard").getEditMode();
-				that.get("showNotificationModal")(that).then(function(sentFlag){
-					that.set("loadding", true);
-					that.get("saveEvent")(that, sentFlag);
-				});
-				/*
-				if(editMode != "update"){
+				
+				let musicianItems = that.get("musicianItems");
+				if(musicianItems.length == 0){
 					that.set("loadding", true);
 					that.get("saveEvent")(that, "notsent");
 				}else{
 					that.get("showNotificationModal")(that).then(function(sentFlag){
 						that.set("loadding", true);
 						that.get("saveEvent")(that, sentFlag);
-					});
-				}*/
+					});					
+				}
+				
 			}), 1000);
 		},
 		back(){

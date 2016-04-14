@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
 		let musicians = that.get("eventService").get("musicians");
 		if(musicians.length == 0){
 			that.set("showAlert", true);
-			that.set("alertText", "Congratulations! You're about to make leading worship a lot easier. Get Started by adding in a few of your musicians, using the \"Create/Manage Musicians\" option above. Try adding yourself first, as a test.");
+			that.set("alertText", "Congratulations! Planning worship is about to become a lot easier. We're going to help you get started. Begin by adding in a few of your musicians, using the \"Create/Manage Musicians\" option above. Try adding yourself!");
 			return true;
 		}
 

@@ -260,9 +260,13 @@ body.adminpanel{
                 width:12px;
                 height: 34px;
                 z-index:12;
-                background-image: url("images/drag-hander.png");
-                background-position: right center;
-                background-repeat: no-repeat;
+                cursor: pointer;
+                padding-left:17px;
+                i{
+                    line-height: 34px;
+                    font-size: 22px;
+                    color:#818181;
+                }
             }
             .form-group {
                 margin-bottom:0px;

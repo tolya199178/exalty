@@ -6,7 +6,7 @@
 	  	<div class="col-sm-3">
 	  		{{musicianDesc}}
 	  	</div>
-	  	<div class="col-sm-2 embercheck {{if musician.sent_text 'checked'}}">
+	  	<div class="col-sm-2 embercheck {{if musician.sent_text 'checked'}}  {{if enableEmail 'enable' 'disabled'}}">
 	  		{{bs-form-element controlType="checkbox" hasLabel=true label="TEXT" property="musician.sent_text"}}
 	  	</div>
 	  	<div class="col-sm-3 embercheck {{if musician.sent_email 'checked'}} {{if enableEmail 'enable' 'disabled'}}">
